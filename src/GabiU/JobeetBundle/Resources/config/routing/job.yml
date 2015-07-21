@@ -1,0 +1,30 @@
+job:
+    path:     /
+    defaults: { _controller: "GabiUJobeetBundle:Job:index" }
+
+job_show:
+    path:     /{id}/show
+    defaults: { _controller: "GabiUJobeetBundle:Job:show" }
+
+job_new:
+    path:     /new
+    defaults: { _controller: "GabiUJobeetBundle:Job:new" }
+
+job_create:
+    path:     /create
+    defaults: { _controller: "GabiUJobeetBundle:Job:create" }
+    methods:  POST
+
+job_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "GabiUJobeetBundle:Job:edit" }
+
+job_update:
+    path:     /{id}/update
+    defaults: { _controller: "GabiUJobeetBundle:Job:update" }
+    methods:  [POST, PUT]
+
+job_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "GabiUJobeetBundle:Job:delete" }
+    methods:  [POST, DELETE]
