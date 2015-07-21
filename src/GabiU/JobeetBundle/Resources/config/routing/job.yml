@@ -5,8 +5,8 @@ job:
 job_show:
     path:     /{company}/{location}/{id}/{position}/
     defaults: { _controller: "GabiUJobeetBundle:Job:show" }
-#    requirements:
-#        id: d+
+    requirements:
+        id: \d+
 
 job_new:
     path:     /new
