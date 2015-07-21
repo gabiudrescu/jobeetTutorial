@@ -1,0 +1,4 @@
+services:
+#    gabi_u_jobeet.example:
+#        class: GabiU\JobeetBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

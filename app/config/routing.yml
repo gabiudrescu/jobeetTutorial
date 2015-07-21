@@ -1,0 +1,3 @@
+gabi_u_jobeet:
+    resource: "@GabiUJobeetBundle/Resources/config/routing.yml"
+    prefix:   /

@@ -1,0 +1,3 @@
+gabi_u_jobeet_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GabiUJobeetBundle:Default:index }
