@@ -1,7 +1,7 @@
+gabi_u_jobeet_homepage:
+    path:     /
+    defaults: { _controller: "GabiUJobeetBundle:Job:index" }
+
 gabi_u_jobeet_job:
     resource: "@GabiUJobeetBundle/Resources/config/routing/job.yml"
     prefix:   /job
-
-gabi_u_jobeet_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: GabiUJobeetBundle:Default:index }
