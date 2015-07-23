@@ -3,6 +3,8 @@
 namespace GabiU\JobeetBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
+use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
 /**
  * JobRepository
@@ -12,4 +14,72 @@ use Doctrine\ORM\EntityRepository;
  */
 class JobRepository extends EntityRepository
 {
+    public function getActiveJob($id)
+    {
+        $query = $this->createQueryBuilder('j')
+            ->where('j.id = :id')
+            ->setParameter('id', $id)
+            ->andWhere('j.expiresAt > :date')
+            ->setParameter('date', date('Y-m-d H:i:s', time()))
+            ->setMaxResults(1)
+            ->getQuery();
+
+        try {
+            $job = $query->getSingleResult();
+        } catch (NoResultException $e) {
+            $job = null;
+        }
+
+        return $job;
+    }
+
+    public function countActiveJobs($category_id = null)
+    {
+        $qb = $this->createQueryBuilder('j')
+            ->select('count(j.id)')
+            ->where('j.expiresAt > :date')
+            ->setParameter('date', date('Y-m-d H:i:s', time()));
+
+        if($category_id)
+        {
+            $qb->andWhere('j.category = :category_id')
+                ->setParameter('category_id', $category_id);
+        }
+
+        $query = $qb->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getActiveJobs($category_id = null, $max = null)
+    {
+        $qb = $this->createQueryBuilder('j')
+            ->where('j.expiresAt > :date')
+            ->setParameter('date', $this->currentDate())
+            ->orderBy('j.expiresAt', 'DESC');
+
+        if($category_id)
+        {
+            $qb->andWhere('j.category = :category_id')
+                ->setParameter('category_id', $category_id);
+        }
+
+        if($max)
+        {
+            $qb->setMaxResults($max);
+        }
+
+        $query = $qb->getQuery();
+
+        return $query->getResult();
+    }
+
+    /**
+     * Mock-able get current date in specific format function / method
+     * @return bool|string
+     */
+    private function currentDate()
+    {
+        return Utils::getCurrentDate();
+    }
 }

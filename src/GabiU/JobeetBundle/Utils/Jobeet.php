@@ -4,6 +4,11 @@ namespace GabiU\JobeetBundle\Utils;
 
 class Jobeet
 {
+    static public function getCurrentDate()
+    {
+        return date("Y-m-d H:i:s", time());
+    }
+
     static public function slugify($text)
     {
         // replace non letter or digits by -

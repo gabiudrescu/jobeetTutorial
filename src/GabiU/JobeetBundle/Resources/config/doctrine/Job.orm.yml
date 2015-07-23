@@ -61,11 +61,11 @@ GabiU\JobeetBundle\Entity\Job:
             nullable: true
     manyToOne:
         category:
-            targetEntity: Category
-            inversedBy: Jobs
+            targetEntity: GabiU\JobeetBundle\Entity\Category
+            inversedBy: jobs
             joinColumn:
                 name: category_id
                 referencedColumnName: id
     lifecycleCallbacks:
-        prePersist: [ setCreatedAtValue ]
+        prePersist: [ setCreatedAtValue, setExpiresAtValue ]
         preUpdate: [ setUpdatedAtValue ]

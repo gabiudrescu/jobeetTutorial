@@ -3,6 +3,7 @@
 namespace GabiU\JobeetBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use GabiU\JobeetBundle\Utils\Jobeet;
 
 /**
  * CategoryRepository
@@ -12,4 +13,14 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    public function getWithJobs()
+    {
+        $query = $this->getEntityManager()->createQuery(
+            "SELECT c FROM GabiUJobeetBundle:Category c LEFT JOIN  c.jobs j where j.expiresAt > :date"
+        )->setParameter('date',Jobeet::getCurrentDate());
+
+        return $query->getResult();
+    }
+
+
 }

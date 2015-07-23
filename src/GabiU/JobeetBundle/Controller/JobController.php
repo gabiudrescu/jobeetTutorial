@@ -4,8 +4,11 @@ namespace GabiU\JobeetBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\ORM\EntityManager;
 
 use GabiU\JobeetBundle\Entity\Job;
+use GabiU\JobeetBundle\Entity\Category;
+
 use GabiU\JobeetBundle\Form\JobType;
 
 /**
@@ -21,12 +24,32 @@ class JobController extends Controller
      */
     public function indexAction()
     {
+        /**
+         * @var $em EntityManager
+         */
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('GabiUJobeetBundle:Job')->findAll();
+        $categories = $em->getRepository("GabiUJobeetBundle:Category")->getWithJobs();
+
+        /**
+         * @var $category Category
+         */
+        foreach($categories as $category)
+        {
+            $category->setActiveJobs(
+                $em->getRepository("GabiUJobeetBundle:Job")->getActiveJobs(
+                    $category->getId(), $this->getParameter("gabiu.jobeet.max_jobs_on_homepage")
+                )
+            );
+
+            $category->setMoreJobs(
+                $em->getRepository("GabiUJobeetBundle:Job")
+                    ->countActiveJobs($category->getId()) - $this->getParameter("gabiu.jobeet.max_jobs_on_homepage")
+            );
+        }
 
         return $this->render('GabiUJobeetBundle:Job:index.html.twig', array(
-            'entities' => $entities,
+            'categories' => $categories,
         ));
     }
     /**
@@ -95,7 +118,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('GabiUJobeetBundle:Job')->find($id);
+        $entity = $em->getRepository('GabiUJobeetBundle:Job')->getActiveJob($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');

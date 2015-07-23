@@ -5,3 +5,7 @@ gabi_u_jobeet_homepage:
 gabi_u_jobeet_job:
     resource: "@GabiUJobeetBundle/Resources/config/routing/job.yml"
     prefix:   /job
+
+gabi_u_jobeet_category:
+    path:     /category/{slug}
+    defaults: { _controller: GabiUJobeetBundle:Category:show }

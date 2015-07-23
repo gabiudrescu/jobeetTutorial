@@ -3,6 +3,7 @@
 namespace GabiU\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
 /**
  * Category
@@ -140,5 +141,76 @@ class Category
     public function __toString()
     {
         return $this->getName() ? $this->getName() : "";
+    }
+
+    private $active_jobs;
+
+    public function setActiveJobs(array $jobs)
+    {
+        $this->active_jobs = $jobs;
+
+        return $this;
+    }
+
+    public function getActiveJobs()
+    {
+        return $this->active_jobs;
+    }
+
+    /**
+     * @var $more_jobs int
+     */
+    private $more_jobs;
+
+    /**
+     * @return int
+     */
+    public function getMoreJobs()
+    {
+        return $this->more_jobs;
+    }
+
+    /**
+     * @param int $jobs
+     */
+    public function setMoreJobs($jobs)
+    {
+        $this->more_jobs = $jobs >= 0 ? $jobs : 0 ;
+    }
+    /**
+     * @var string
+     */
+    private $slug;
+
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setSlugValue()
+    {
+        $this->setSlug(Utils::slugify($this->getName()));
     }
 }
