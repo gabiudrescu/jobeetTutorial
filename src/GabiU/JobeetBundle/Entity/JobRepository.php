@@ -4,6 +4,7 @@ namespace GabiU\JobeetBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
 /**
@@ -51,7 +52,7 @@ class JobRepository extends EntityRepository
         return $query->getSingleScalarResult();
     }
 
-    public function getActiveJobs($category_id = null, $max = null)
+    public function getActiveJobs($category_id = null, $max = null, $offset = null)
     {
         $qb = $this->createQueryBuilder('j')
             ->where('j.expiresAt > :date')
@@ -69,9 +70,14 @@ class JobRepository extends EntityRepository
             $qb->setMaxResults($max);
         }
 
-        $query = $qb->getQuery();
+        if($offset)
+        {
+            $qb->setFirstResult($offset);
+        }
 
-        return $query->getResult();
+        $paginator = Utils::getPaginator($qb->getQuery());
+
+        return $paginator;
     }
 
     /**

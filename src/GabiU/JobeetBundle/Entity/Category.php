@@ -145,7 +145,7 @@ class Category
 
     private $active_jobs;
 
-    public function setActiveJobs(array $jobs)
+    public function setActiveJobs($jobs)
     {
         $this->active_jobs = $jobs;
 

@@ -1,7 +1,57 @@
-{% extends "::base.html.twig" %}
+{% extends "GabiUJobeetBundle::layout.html.twig" %}
 
-{% block title %}GabiUJobeetBundle:Category:show{% endblock %}
+{% block title %}
+    Jobs in {{ category.name }} category
+{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Category:show page</h1>
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset("bundles/gabiujobeet/css/jobs.css") }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+    <div class="category">
+        <div class="feed">
+            <a href="">Feed</a>
+        </div>
+        <h1>{{ category.name }}</h1>s
+    </div>
+
+    {{ include('@GabiUJobeet/list.html.twig', {'jobs':category.activejobs}) }}
+
+    {% if lastPage > 1 %}
+        <div class="pagination">
+            <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':1}) }}">
+               <img src="{{ asset('bundles/gabiujobeet/images/first.png') }}" alt="First Page" title="First Page" />
+            </a>
+
+            <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':previousPage}) }}">
+                <img src="{{ asset('bundles/gabiujobeet/images/previous.png') }}" alt="Previous Page" title="Previous Page">
+            </a>
+
+            {% for i in 1..lastPage %}
+                {% if i == currentPage %}
+                    {{ i }}
+                {% else %}
+                    <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':i}) }}">
+                        {{ i }}
+                    </a>
+                {% endif %}
+            {% endfor %}<a href="{{ path('gabi_u_jobeet_category', { 'slug': category.slug, 'page': nextPage }) }}">
+                <img src="{{ asset('bundles/gabiujobeet/images/next.png') }}" alt="Next page" title="Next page" />
+            </a>
+
+            <a href="{{ path('gabi_u_jobeet_category', { 'slug': category.slug, 'page': lastPage }) }}">
+                <img src="{{ asset('bundles/gabiujobeet/images/last.png') }}" alt="Last page" title="Last page" />
+            </a>
+        </div>
+    {% endif %}
+
+    <div class="pagination_desc">
+        <strong>{{ totalJobs }}</strong> jobs in this category
+
+        {% if lastPage > 1 %}
+            - page <strong>{{ currentPage }}/{{ lastPage }}</strong>
+        {% endif %}
+    </div>
 {% endblock %}

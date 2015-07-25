@@ -2,11 +2,19 @@
 
 namespace GabiU\JobeetBundle\Utils;
 
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+
 class Jobeet
 {
     static public function getCurrentDate()
     {
         return date("Y-m-d H:i:s", time());
+    }
+
+    static public function getPaginator(Query $qb)
+    {
+        return new Paginator($qb);
     }
 
     static public function slugify($text)

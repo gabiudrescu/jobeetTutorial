@@ -2,8 +2,10 @@
 
 namespace GabiU\JobeetBundle\Entity;
 
+use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
 use GabiU\JobeetBundle\Utils\Jobeet;
+use GabiU\JobeetBundle\Entity\Category;
 
 /**
  * CategoryRepository
@@ -22,5 +24,18 @@ class CategoryRepository extends EntityRepository
         return $query->getResult();
     }
 
-
+    /**
+     * @param $slug
+     *
+     * @return null|Category
+     */
+    public function findOneBySlug($slug)
+    {
+        try{
+            return $this->findOneBy(array("slug" => $slug));
+        } catch (EntityNotFoundException $e)
+        {
+            return null;
+        }
+    }
 }

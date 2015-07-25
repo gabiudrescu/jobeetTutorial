@@ -7,5 +7,5 @@ gabi_u_jobeet_job:
     prefix:   /job
 
 gabi_u_jobeet_category:
-    path:     /category/{slug}
-    defaults: { _controller: GabiUJobeetBundle:Category:show }
+    path:     /category/{slug}/{page}
+    defaults: { _controller: GabiUJobeetBundle:Category:show, page: 1 }

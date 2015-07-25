@@ -40,4 +40,4 @@
 # Composer PHAR
 /composer.phar
 
-
+/web/cov
