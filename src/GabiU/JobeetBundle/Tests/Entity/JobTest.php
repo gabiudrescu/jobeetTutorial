@@ -46,12 +46,26 @@ class JobTest extends Setup {
         $this->assertEquals($job->getLocationSlug(), Util::slugify($job->getLocation()));
     }
 
-    public function testSetExpiresAtValue()
+    public function testLifecycleCallbacks()
     {
-        $job = new Entity();
-        $job->setExpiresAtValue();
+        /**
+         * @var $job Entity
+         */
+        $job = $this->em->getRepository("GabiUJobeetBundle:Job")
+            ->find(1);
 
-        $this->assertEquals(time() + 86400 * 30, $job->getExpiresAt()->format("U"));
+        $job->setEmail("somethingElse@blabla.com");
+
+        $job_id = $job->getId();
+
+        $this->em->persist($job);
+        $this->em->flush();
+
+        $job = $this->em->getRepository("GabiUJobeetBundle:Job")
+            ->find($job_id);
+
+        $this->assertEquals("somethingElse@blabla.com", $job->getEmail());
+
+        $this->assertTrue($job->getUpdatedAt() !== $job->getCreatedAt());
     }
-
 }

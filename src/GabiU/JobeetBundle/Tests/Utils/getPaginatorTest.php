@@ -8,7 +8,19 @@
 
 namespace GabiU\JobeetBundle\Tests\Utils;
 
+use GabiU\JobeetBundle\Tests\Entity\Setup;
+use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
-class getPaginatorTest {
+class getPaginatorTest extends Setup {
 
+    /**
+     * quick and dirty way to assert if Utils getPaginator method
+     * returns a Paginator instance - without mocking any objects
+     */
+    public function testGetPaginator()
+    {
+        $query = $this->em->createQuery();
+
+        $this->assertInstanceOf('Doctrine\ORM\Tools\Pagination\Paginator', Utils::getPaginator($query));
+    }
 }
