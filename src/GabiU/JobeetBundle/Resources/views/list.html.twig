@@ -1,6 +1,6 @@
 {% block listJobs %}
 
-    <table class="jobs">
+    <table class="jobs" id="{{ category.slug }}">
         {% for entity in category.activeJobs %}
             <tr class="{{ cycle(['even','odd'], loop.index) }}">
                 <td class="location">{{ entity.location }}</td>

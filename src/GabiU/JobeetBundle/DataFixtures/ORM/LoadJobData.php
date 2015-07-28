@@ -23,7 +23,7 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface {
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 100; $i <= 130; $i++)
+        for ($i = 100; $i <= 105; $i++)
         {
             $jobs_sensio_labs = new Job();
             $jobs_sensio_labs->setCategory($manager->merge($this->getReference("category-programming")));

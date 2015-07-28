@@ -9,10 +9,11 @@
 namespace GabiU\JobeetBundle\Tests\Entity;
 
 use Doctrine\ORM\NoResultException;
+use GabiU\JobeetBundle\Tests\FixturesTestCase;
 use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 use GabiU\JobeetBundle\Entity\Category;
 
-class JobRepositoryTest extends DatabaseTestSetup {
+class JobRepositoryTest extends FixturesTestCase {
     public function testCountActiveJobs()
     {
         $query = $this->em->createQuery("SELECT c FROM GabiUJobeetBundle:Category c");

@@ -8,9 +8,10 @@
 
 namespace GabiU\JobeetBundle\Tests\Entity;
 
+use GabiU\JobeetBundle\Tests\FixturesTestCase;
 use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
-class CategoryRepositoryTest extends DatabaseTestSetup {
+class CategoryRepositoryTest extends FixturesTestCase {
     public function testGetWithJobs()
     {
         $query = $this->em->createQuery("SELECT c FROM GabiUJobeetBundle:Category c LEFT JOIN c.jobs j where j.expiresAt > :date");

@@ -9,9 +9,10 @@
 namespace GabiU\JobeetBundle\Tests\Entity;
 
 use GabiU\JobeetBundle\Entity\Job as Entity;
+use GabiU\JobeetBundle\Tests\FixturesTestCase;
 use GabiU\JobeetBundle\Utils\Jobeet as Util;
 
-class JobTest extends DatabaseTestSetup {
+class JobTest extends FixturesTestCase {
 
     public function testGetCompanySlug()
     {

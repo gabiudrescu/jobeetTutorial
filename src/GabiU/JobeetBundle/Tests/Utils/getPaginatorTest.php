@@ -8,10 +8,10 @@
 
 namespace GabiU\JobeetBundle\Tests\Utils;
 
-use GabiU\JobeetBundle\Tests\Entity\DatabaseTestSetup;
+use GabiU\JobeetBundle\Tests\FixturesTestCase;
 use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
-class getPaginatorTest extends DatabaseTestSetup {
+class getPaginatorTest extends FixturesTestCase {
 
     /**
      * quick and dirty way to assert if Utils getPaginator method

@@ -6,7 +6,7 @@
  * Time: 19:41
  */
 
-namespace GabiU\JobeetBundle\Tests\Entity;
+namespace GabiU\JobeetBundle\Tests;
 
 use Doctrine\Bundle\DoctrineBundle\Command\CreateDatabaseDoctrineCommand;
 use Doctrine\Bundle\DoctrineBundle\Command\DropDatabaseDoctrineCommand;
@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Doctrine\ORM\EntityManager as Em;
 
-class DatabaseTestSetup extends KernelTestCase {
+class FixturesTestCase extends KernelTestCase {
 
     /**
      * @var $em Em
