@@ -11,7 +11,7 @@ namespace GabiU\JobeetBundle\Tests\Entity;
 use GabiU\JobeetBundle\Entity\Job as Entity;
 use GabiU\JobeetBundle\Utils\Jobeet as Util;
 
-class JobTest extends Setup {
+class JobTest extends DatabaseTestSetup {
 
     public function testGetCompanySlug()
     {

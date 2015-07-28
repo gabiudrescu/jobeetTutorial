@@ -12,7 +12,7 @@ use Doctrine\ORM\NoResultException;
 use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 use GabiU\JobeetBundle\Entity\Category;
 
-class JobRepositoryTest extends Setup {
+class JobRepositoryTest extends DatabaseTestSetup {
     public function testCountActiveJobs()
     {
         $query = $this->em->createQuery("SELECT c FROM GabiUJobeetBundle:Category c");

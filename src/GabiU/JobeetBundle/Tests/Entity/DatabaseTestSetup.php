@@ -15,12 +15,12 @@ use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Symfony\Bridge\Doctrine\DataFixtures\ContainerAwareLoader;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Doctrine\ORM\EntityManager as Em;
 
-class Setup extends WebTestCase {
+class DatabaseTestSetup extends KernelTestCase {
 
     /**
      * @var $em Em
@@ -71,8 +71,7 @@ class Setup extends WebTestCase {
         $this->em = static::$kernel->getContainer()
             ->get("doctrine.orm.entity_manager");
 
-        $client = static::createClient();
-        $loader = new ContainerAwareLoader($client->getContainer());
+        $loader = new ContainerAwareLoader(static::$kernel->getContainer());
         $loader->loadFromDirectory(static::$kernel->locateResource("@GabiUJobeetBundle/DataFixtures/ORM"));
 
         $purger = new ORMPurger($this->em);
