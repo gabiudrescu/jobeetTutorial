@@ -67,5 +67,5 @@ GabiU\JobeetBundle\Entity\Job:
                 name: category_id
                 referencedColumnName: id
     lifecycleCallbacks:
-        prePersist: [ setCreatedAtValue, setExpiresAtValue ]
+        prePersist: [ setTokenValue, setCreatedAtValue, setExpiresAtValue ]
         preUpdate: [ setUpdatedAtValue ]

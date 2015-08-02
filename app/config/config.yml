@@ -17,7 +17,7 @@ framework:
         strict_requirements: ~
     form:            ~
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_annotations: true, enabled: true }
     #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
@@ -84,3 +84,13 @@ doctrine_migrations:
     namespace: Application\Migrations
     table_name: migration_versions
     name: Application Migrations
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        companyLogo:
+            uri_prefix: /images/logos
+            upload_destination: %kernel.root_dir%/../web/images/logo
+            delete_on_remove: true
+            delete_on_update: true
+            namer: vich_uploader.namer_uniqid

@@ -4,9 +4,13 @@ namespace GabiU\JobeetBundle\Entity;
 
 use GabiU\JobeetBundle\Utils\Jobeet as Jobeet;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Job
+ * @Vich\Uploadable
  */
 class Job
 {
@@ -27,9 +31,36 @@ class Job
 
     /**
      * @var string
+     *
      */
-    private $logo;
+    protected $logo;
 
+    /**
+     * @Vich\UploadableField(mapping="companyLogo", fileNameProperty="logo")
+     * @var File $logoFile
+     */
+    protected $logoFile;
+
+    /**
+     * @return File|UploadedFile
+     */
+    public function getLogoFile()
+    {
+        return $this->logoFile;
+    }
+
+    /**
+     * @param File|UploadedFile $logoFile
+     */
+    public function setLogoFile(UploadedFile $logoFile = null)
+    {
+        $this->logoFile = $logoFile;
+
+        if ($logoFile)
+        {
+            $this->setUpdatedAtValue();
+        }
+    }
     /**
      * @var string
      */
@@ -517,5 +548,44 @@ class Job
             $now = $this->getCreatedAt() ? $this->getCreatedAt()->format("U") : time();
             $this->setExpiresAt(new \DateTime(date("Y-m-d H:i:s", $now + 86400 * 30)));
         }
+    }
+
+    public static function getTypes()
+    {
+        return array(
+            "full-time" => "Full-Time",
+            "part-time" => "Part-Time",
+            "freelance" => "Freelance"
+        );
+    }
+
+    public static function getTypeValues(){
+        return array_keys(self::getTypes());
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTokenValue()
+    {
+        if(!$this->getToken())
+        {
+            $this->setToken(sha1($this->getEmail().rand(111111, 999999)));
+        }
+    }
+
+    public function isExpired()
+    {
+        return $this->getDaysBeforeExpires() < 0;
+    }
+
+    public function expiresSoon()
+    {
+        return $this->getDaysBeforeExpires() < 5;
+    }
+
+    public function getDaysBeforeExpires()
+    {
+        return ceil(($this->getExpiresAt()->format("U") - time()) / 86400);
     }
 }

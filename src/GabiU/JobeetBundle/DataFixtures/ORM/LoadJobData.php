@@ -36,8 +36,7 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface {
             $jobs_sensio_labs->setDescription("You've already developed websites with symfony and you want to work with Open-Source technologies. You have a minimum of 3 years experience in web development with PHP or Java and you wish to participate to development of Web 2.0 sites using the best frameworks available.");
             $jobs_sensio_labs->setHowToApply("Send your resume to fabien[a]sensio.com");
             $jobs_sensio_labs->setIsPublic(true);
-            $jobs_sensio_labs->setIsActivated(true);
-            $jobs_sensio_labs->setToken("job_dev_".$i);
+            $jobs_sensio_labs->setIsActivated(false);
             $jobs_sensio_labs->setEmail("gabriel.udr@gmail.com");
             $jobs_sensio_labs->setExpiresAt(new \DateTime("+30 days"));
 
@@ -57,8 +56,7 @@ class LoadJobData extends AbstractFixture implements OrderedFixtureInterface {
             $job_extreme_sensio->setDescription('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in.');
             $job_extreme_sensio->setHowToApply('Send your resume to fabien.potencier [at] sensio.com');
             $job_extreme_sensio->setIsPublic(true);
-            $job_extreme_sensio->setIsActivated(true);
-            $job_extreme_sensio->setToken('job_extreme_sensio_' . $i);
+            $job_extreme_sensio->setIsActivated(false);
             $job_extreme_sensio->setEmail('job@example.com');
             $job_extreme_sensio->setExpiresAt(new \DateTime('+30 days'));
 

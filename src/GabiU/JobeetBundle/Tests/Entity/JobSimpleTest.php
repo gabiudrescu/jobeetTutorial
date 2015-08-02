@@ -51,4 +51,11 @@ class JobSimpleTest extends \PHPUnit_Framework_TestCase {
             $this->assertEquals($property, $job->$getter());
         }
     }
+
+    public function testGetTypes()
+    {
+        $this->assertArrayHasKey("full-time", Entity::getTypes());
+        $this->assertContains("Freelance", Entity::getTypes());
+        $this->assertContains("full-time", Entity::getTypeValues());
+    }
 }

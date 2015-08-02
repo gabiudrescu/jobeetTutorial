@@ -4,6 +4,13 @@ job_show:
     requirements:
         id: \d+
 
+job_preview:
+    path:     /{token}/
+    defaults: { _controller: "GabiUJobeetBundle:Job:preview" }
+    requirements:
+        id: \w+
+    methods: [GET, POST, PUT]
+
 job_new:
     path:     /new
     defaults: { _controller: "GabiUJobeetBundle:Job:new" }
@@ -14,15 +21,15 @@ job_create:
     methods:  POST
 
 job_edit:
-    path:     /{id}/edit
+    path:     /{token}/edit
     defaults: { _controller: "GabiUJobeetBundle:Job:edit" }
 
 job_update:
-    path:     /{id}/update
+    path:     /{token}/update
     defaults: { _controller: "GabiUJobeetBundle:Job:update" }
     methods:  [POST, PUT]
 
 job_delete:
-    path:     /{id}/delete
+    path:     /{token}/delete
     defaults: { _controller: "GabiUJobeetBundle:Job:delete" }
     methods:  [POST, DELETE]

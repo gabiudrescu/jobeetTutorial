@@ -1,0 +1,25 @@
+GabiU\JobeetBundle\Entity\Job:
+    properties:
+        category:
+            - NotBlank: ~
+        company:
+            - NotBlank: ~
+        position:
+            - NotBlank: ~
+        location:
+            - NotBlank: ~
+        description:
+            - NotBlank: ~
+        howToApply:
+            - NotBlank: ~
+        url:
+            - NotBlank: ~
+            - Url: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+        type:
+            - NotBlank: ~
+            - Choice: { callback: getTypeValues }
+        logoFile:
+            - Image: ~
