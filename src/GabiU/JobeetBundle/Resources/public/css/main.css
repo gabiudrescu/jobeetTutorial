@@ -300,17 +300,19 @@ em
 
 .flash_notice
 {
-  margin: 3px 0;
+  margin: 5px auto;
   padding: 7px;
   background-color: #cfc;
+  width: 783px;
 }
 
 .flash_error
 {
-  margin: 3px 0;
+    margin: 5px auto;
   padding: 7px;
   background-color: #f33;
   color: #fff;
+  width: 783px;
 }
 
 

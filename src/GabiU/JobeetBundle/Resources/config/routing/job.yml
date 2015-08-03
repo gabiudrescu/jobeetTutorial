@@ -5,11 +5,18 @@ job_show:
         id: \d+
 
 job_preview:
-    path:     /{token}/
+    path:     /{token}/preview
     defaults: { _controller: "GabiUJobeetBundle:Job:preview" }
     requirements:
         id: \w+
-    methods: [GET, POST, PUT]
+    methods: [GET]
+
+job_publish:
+    path:     /{token}/publish
+    defaults: { _controller: "GabiUJobeetBundle:Job:publish" }
+    requirements:
+        id: \w+
+    methods: [PUT, POST]
 
 job_new:
     path:     /new

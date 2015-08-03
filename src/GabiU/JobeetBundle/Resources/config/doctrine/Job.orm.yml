@@ -45,7 +45,8 @@ GabiU\JobeetBundle\Entity\Job:
         isActivated:
             type: boolean
             column: is_activated
-            nullable: true
+            options:
+                default: false
         email:
             type: string
             length: 255

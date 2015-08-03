@@ -44,16 +44,12 @@
     </div>
 
     <div id="content">
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash_notice">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-
-        {% for flashMessage in app.session.flashbag.get('error') %}
-            <div class="flash_error">
-                {{ flashMessage }}
-            </div>
+        {% for label, flashes in app.session.flashbag.all %}
+            {% for flash in flashes %}
+                <div class="flash_{{ label }}">
+                    {{ flash }}
+                </div>
+            {% endfor %}
         {% endfor %}
 
         <div class="content">

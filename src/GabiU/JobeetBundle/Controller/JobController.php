@@ -67,7 +67,9 @@ class JobController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('job_show', array('id' => $entity->getId())));
+            $this->addFlash("notice", "Job created! Approve now:");
+
+            return $this->redirect($this->generateUrl('job_preview', array('token' => $entity->getToken())));
         }
 
         return $this->render(
@@ -143,10 +145,54 @@ class JobController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($token);
+        $publishForm = $this->createPublishForm($token);
 
         return $this->render("@GabiUJobeet/Job/show.html.twig", array(
             "entity" => $entity,
-            "deleteForm" => $deleteForm->createView()
+            "deleteForm" => $deleteForm->createView(),
+            "publishForm" => $publishForm->createView()
+        ));
+    }
+
+    private function createPublishForm($token)
+    {
+        return $this->createFormBuilder(array("token" => $token))
+            ->setAction($this->generateUrl("job_publish", array("token" => $token)))
+            ->add("token", 'hidden')
+            ->add("submit", "submit", array("label" => "Publish"))
+            ->getForm();
+    }
+
+    public function publishAction($token)
+    {
+        /**
+         * @var \Doctrine\ORM\EntityManager $em
+         */
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Job $entity */
+        $entity = $em->getRepository("GabiUJobeetBundle:Job")->findOneBy(array("token" => $token));
+
+        if (!$entity)
+        {
+            throw $this->createNotFoundException("Unable to find Job entity.");
+        }
+
+        $entity->setIsActivated(true);
+
+        try {
+            $em->persist($entity);
+            $em->flush($entity);
+            $this->addFlash("notice", "Job published!");
+        } catch (\Exception $e){
+            $this->addFlash("error", $e->getMessage());
+        }
+
+        return $this->redirectToRoute("job_show", array(
+            "company" => $entity->getCompanySlug(),
+            "location" => $entity->getLocationSlug(),
+            "id" => $entity->getId(),
+            "position" => $entity->getPositionSlug()
         ));
     }
 
@@ -158,7 +204,7 @@ class JobController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('GabiUJobeetBundle:Job')->findOneByToken($token);
+        $entity = $em->getRepository('GabiUJobeetBundle:Job')->findOneBy(array("token" => $token));
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Job entity.');
@@ -185,11 +231,11 @@ class JobController extends Controller
     private function createEditForm(Job $entity)
     {
         $form = $this->createForm(new JobType(), $entity, array(
-            'action' => $this->generateUrl('job_preview', array('token' => $entity->getId())),
+            'action' => $this->generateUrl('job_update', array('token' => $entity->getToken())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Preview'));
+        $form->add('submit', 'submit', array('label' => 'Edit'));
 
         return $form;
     }
@@ -214,7 +260,7 @@ class JobController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('job_edit', array('token' => $token)));
+            return $this->redirect($this->generateUrl('job_preview', array('token' => $token)));
         }
 
         return $this->render('GabiUJobeetBundle:Job:form.html.twig', array(
@@ -244,6 +290,7 @@ class JobController extends Controller
             $em->flush();
         }
 
+        $this->addFlash("notice", "# $token Job deleted");
         return $this->redirect($this->generateUrl('gabi_u_jobeet_homepage'));
     }
 

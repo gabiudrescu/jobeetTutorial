@@ -18,8 +18,11 @@ class CategoryRepository extends EntityRepository
     public function getWithJobs()
     {
         $query = $this->getEntityManager()->createQuery(
-            "SELECT c FROM GabiUJobeetBundle:Category c LEFT JOIN  c.jobs j where j.expiresAt > :date"
-        )->setParameter('date',Jobeet::getCurrentDate());
+            "SELECT c FROM GabiUJobeetBundle:Category c LEFT JOIN  c.jobs j where j.expiresAt > :date and j.isActivated = :activated"
+        );
+
+        $query->setParameter("date", Jobeet::getCurrentDate());
+        $query->setParameter("activated", true);
 
         return $query->getResult();
     }

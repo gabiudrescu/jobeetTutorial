@@ -52,7 +52,7 @@ class Job
     /**
      * @param File|UploadedFile $logoFile
      */
-    public function setLogoFile(UploadedFile $logoFile = null)
+    public function setLogoFile($logoFile = null)
     {
         $this->logoFile = $logoFile;
 
@@ -99,7 +99,7 @@ class Job
     /**
      * @var boolean
      */
-    private $isActivated;
+    private $isActivated = false;
 
     /**
      * @var string
