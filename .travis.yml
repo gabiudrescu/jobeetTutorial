@@ -7,8 +7,8 @@ script: phpunit -c app/
 before_script:
     - cp app/config/parameters.yml.dist app/config/parameters.yml
     - composer install
-    - export ADDITIONAL_PATH=`php -i | grep -F --color=never 'Scan this dir for additional .ini files'`
-    - echo 'xdebug.max_nesting_level=9999' | sudo tee ${ADDITIONAL_PATH:42}/symfony2.ini
+#    - export ADDITIONAL_PATH=`php -i | grep -F --color=never 'Scan this dir for additional .ini files'`
+#    - echo 'xdebug.max_nesting_level=9999' | sudo tee ${ADDITIONAL_PATH:42}/symfony2.ini
 #    - sudo apt-get update
 #    - sudo apt-get install apache2 libapache2-mod-fastcgi
 #    # enable php-fpm
