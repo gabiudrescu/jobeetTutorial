@@ -10,7 +10,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -94,3 +94,16 @@ vich_uploader:
             delete_on_remove: true
             delete_on_update: true
             namer: vich_uploader.namer_uniqid
+
+
+easy_admin:
+    entities:
+        Job:
+            class: GabiU\JobeetBundle\Entity\Job
+            list:
+                actions:
+                    - { name: 'extend', type: 'method', label: 'Extend job' }
+        Category:
+            class: GabiU\JobeetBundle\Entity\Category
+        Affiliate:
+            class: GabiU\JobeetBundle\Entity\Affiliate

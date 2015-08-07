@@ -9,3 +9,8 @@ gabi_u_jobeet_job:
 gabi_u_jobeet_category:
     path:     /category/{slug}/{page}
     defaults: { _controller: GabiUJobeetBundle:Category:show, page: 1 }
+
+easy_admin_bundle:
+    resource: "@GabiUJobeetBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
