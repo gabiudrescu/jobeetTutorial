@@ -3,7 +3,6 @@
 namespace GabiU\JobeetBundle\Controller;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class AdminController extends BaseAdminController
 {
