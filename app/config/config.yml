@@ -89,7 +89,7 @@ vich_uploader:
     db_driver: orm
     mappings:
         companyLogo:
-            uri_prefix: /images/logos
+            uri_prefix: /images/logo
             upload_destination: %kernel.root_dir%/../web/images/logo
             delete_on_remove: true
             delete_on_update: true
@@ -97,13 +97,36 @@ vich_uploader:
 
 
 easy_admin:
+    site_name: 'Jobeet Admin'
     entities:
         Job:
             class: GabiU\JobeetBundle\Entity\Job
+            label: 'All jobs'
             list:
+                fields:
+                    - 'id'
+                    - { property: 'logo', type: 'image', base_path: '/images/logo' }
+                    - { property: 'position', label: 'Position' }
+                    - { property: 'location' }
+                    - { property: 'company' }
+                    - { property: 'isPublic', label: 'Available via API?' }
+                    - { property: 'isActivated', label: 'Has been activated?' }
                 actions:
                     - { name: 'extend', type: 'method', label: 'Extend job' }
+            form:
+                fields:
+                    - { property: 'Position', help: 'Job title' }
+                    - { property: 'location' }
+                    - { property: 'company' }
+                    - { property: 'description', type: 'ckeditor' }
+                    - { property: 'howToApply', type: text }
+                    - { property: 'url', type: url, label: 'URL' }
+                    - { property: 'logoFile', type: vich_image, label: 'Company logo' }
+                    - { property: 'category' }
+                    - { property: 'type' }
         Category:
             class: GabiU\JobeetBundle\Entity\Category
+            label: 'Job categories'
         Affiliate:
             class: GabiU\JobeetBundle\Entity\Affiliate
+            label: 'API Affiliate access'

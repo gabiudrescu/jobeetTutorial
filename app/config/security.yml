@@ -1,11 +1,15 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
-
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
-    providers:
+    providers:            # Required
+        # Examples:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    gabi:
+                        password:           1234
+                        roles:              [ROLE_USER, ROLE_ADMIN]
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -13,12 +17,25 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
+        secured_area:
+            pattern: ^/
             anonymous: ~
-            # activate different ways to authenticate
+            logout:
+                path: /logout
+                target: /
+            form_login:
+                login_path: /login
+                username_parameter: form[username]
+                password_parameter: form[password]
+                check_path: /login_check
+                default_target_path: gabi_u_jobeet_homepage
 
-            # http_basic: ~
-            # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
 
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
