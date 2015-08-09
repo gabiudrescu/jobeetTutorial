@@ -15,6 +15,25 @@ use GabiU\JobeetBundle\Utils\Jobeet as Utils;
  */
 class JobRepository extends EntityRepository
 {
+    /**
+     * @param int $days
+     *
+     * @return mixed
+     */
+    public function cleanup($days)
+    {
+        $date = new \DateTime(sprintf("-%d days", $days));
+
+        $query = $this->createQueryBuilder("j")
+            ->delete()
+            ->where("j.isActivated = 0")
+            ->andWhere("j.createdAt < :created_at")
+            ->setParameter("created_at", $date->format("Y-m-d"))
+            ->getQuery();
+
+        return $query->execute();
+    }
+
     public function getActiveJob($id)
     {
         $query = $this->createQueryBuilder('j')
