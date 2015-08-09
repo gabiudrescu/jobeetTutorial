@@ -550,6 +550,16 @@ class Job
         }
     }
 
+    /**
+     * Extends this current job with 30 days
+     * @return $this
+     */
+    public function extend()
+    {
+        $this->setExpiresAt(new \DateTime($this->getExpiresAt()->add(new \DateInterval("P30D"))->format("Y-m-d H:i:s")));
+        return $this;
+    }
+
     public static function getTypes()
     {
         return array(
@@ -587,5 +597,10 @@ class Job
     public function getDaysBeforeExpires()
     {
         return ceil(($this->getExpiresAt()->format("U") - time()) / 86400);
+    }
+
+    public function __toString()
+    {
+        return sprintf("#%s - %s (%s in %s)", $this->getId(), $this->getPosition(), $this->getCompany(), $this->getLocation());
     }
 }

@@ -19,7 +19,9 @@ class AppKernel extends Kernel
             new GabiU\JobeetBundle\GabiUJobeetBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
-            new \Vich\UploaderBundle\VichUploaderBundle()
+            new \Vich\UploaderBundle\VichUploaderBundle(),
+            new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
