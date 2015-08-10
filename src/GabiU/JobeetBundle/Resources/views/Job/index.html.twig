@@ -11,7 +11,7 @@
             <div>
                 <div id="category_{{ category.slug }}" class="category">
                     <div class="feed">
-                        <a href="">Feed</a>
+                        <a href="{{ path('gabi_u_jobeet_category_feed', {'slug':category.slug}) }}">Feed</a>
                     </div>
                     <h1><a href="{{ path("gabi_u_jobeet_category", {'slug':category.slug}) }}">{{ category.name }}</a></h1>
                 </div>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>Jobeet</title>
+    <subtitle>Latest Jobs</subtitle>
+    <link href="{{ url('gabi_u_jobeet_all_feed', { 'page': app.request.get('page') ,'_format':'atom'}) }}" rel="self"/>
+    <link href="{{ url('gabi_u_jobeet_all_feed', { 'page': app.request.get('page') + 1 ,'_format':'atom'}) }}" rel="next"/>
+    <link href="{{ url('gabi_u_jobeet_all_feed', { 'page': app.request.get('page') == 1 ? 1 : app.request.get('page') - 1 ,'_format':'atom'}) }}" rel="previous"/>
+    <link href="{{ url('gabi_u_jobeet_all_feed', { 'page': 1 ,'_format':'atom'}) }}" rel="first"/>
+    <link href="{{ url('gabi_u_jobeet_all_feed', { 'page': maxPage ,'_format':'atom'}) }}" rel="last"/>
+    <updated>{{ latestJobDate }}</updated>
+    <author><name>Jobeet</name></author>
+    <id>Unique Id</id>
+
+    {% for job in jobs %}
+        <entry>
+            <title>{{ job.position }} - ({{ job.location }})</title>
+            <link href="{{ url('job_show', {'id' : job.id, 'company' : job.companyslug, 'location' : job.locationslug, 'position' : job.positionslug }) }}" />
+            <id>{{ job.id }}</id>
+            <updated>{{ job.createdAt.format(constant('DATE_ATOM')) }}</updated>
+            <summary type="xhtml">
+                <div xmlns="http://www.w3.org/1999/xhtml">
+                    {% if job.logo %}
+                    <a href="{{ job.url }}">
+                        <img src="{{ vich_uploader_asset(job,'logoFile') }}" width="200px" align="right" alt="{{ job.company }}" />
+                    </a>
+                    {% endif %}
+                    <div>
+                        {{ job.description|nl2br }}
+                    </div>
+                    <h4>
+                        How to apply?
+                    </h4>
+                    <p>{{ job.howToApply }}</p>
+                </div>
+            </summary>
+            <author><name>{{ job.company }}</name></author>
+        </entry>
+    {% endfor %}
+</feed>

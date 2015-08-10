@@ -22,7 +22,7 @@ class JobController extends Controller
      * Lists all Job entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         /**
          * @var $em EntityManager

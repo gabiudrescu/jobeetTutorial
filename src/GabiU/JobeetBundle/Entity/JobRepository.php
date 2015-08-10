@@ -105,6 +105,40 @@ class JobRepository extends EntityRepository
         return $paginator;
     }
 
+
+    public function getLatestJobCreatedAt($categoryId = null)
+    {
+        $query = $this->createQueryBuilder("j")
+            ->where("j.expiresAt > :date")
+            ->andWhere("j.isActivated = :activated")
+            ->orderBy("j.expiresAt", "DESC")
+            ->setMaxResults(1);
+
+        $query->setParameters(array(
+            "date" => Utils::getCurrentDate(),
+            "activated" => 1
+        ));
+
+        if ($categoryId)
+        {
+            $query->andWhere("j.category = :category_id");
+            $query->setParameter("category_id", $categoryId);
+        }
+
+        try {
+            /**
+             * @var Job $job
+             */
+            $job = $query->getQuery()->getSingleResult();
+
+            return $job->getCreatedAt()->format(DATE_ATOM);
+
+        } catch (NoResultException $e)
+        {
+            return null;
+        }
+    }
+
     /**
      * Mock-able get current date in specific format function / method
      * @return bool|string
