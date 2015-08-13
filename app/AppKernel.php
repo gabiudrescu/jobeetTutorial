@@ -22,6 +22,9 @@ class AppKernel extends Kernel
             new \Vich\UploaderBundle\VichUploaderBundle(),
             new JavierEguiluz\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

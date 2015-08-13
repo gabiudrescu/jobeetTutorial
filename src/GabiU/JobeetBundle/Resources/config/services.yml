@@ -2,6 +2,6 @@ imports:
     - { resource: parameters.yml }
 
 services:
-#    gabi_u_jobeet.example:
-#        class: GabiU\JobeetBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    gabi_u_jobeet.page.handler:
+        class: %gabiu.jobeet.job.handler.class%
+        arguments: [@doctrine.orm.entity_manager, %gabiu.jobeet.job.class% ]

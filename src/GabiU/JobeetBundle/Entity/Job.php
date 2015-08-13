@@ -2,17 +2,24 @@
 
 namespace GabiU\JobeetBundle\Entity;
 
+use GabiU\JobeetBundle\Model\JobInterface;
 use GabiU\JobeetBundle\Utils\Jobeet as Jobeet;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Exclude;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use JMS\Serializer\Annotation\MaxDepth;
+
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 
 /**
  * Job
  * @Vich\Uploadable
+ * @ExclusionPolicy("none")
  */
-class Job
+class Job implements JobInterface
 {
     /**
      * @var integer
@@ -63,6 +70,7 @@ class Job
     }
     /**
      * @var string
+     * @Expose()
      */
     private $url;
 
@@ -78,6 +86,7 @@ class Job
 
     /**
      * @var string
+     * @Expose()
      */
     private $description;
 
@@ -476,8 +485,11 @@ class Job
     {
         return $this->updatedAt;
     }
+
     /**
      * @var \GabiU\JobeetBundle\Entity\Category
+     * @MaxDepth(0)
+     * @Exclude()
      */
     private $category;
 

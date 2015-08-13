@@ -34,3 +34,12 @@ easy_admin_bundle:
     resource: "@GabiUJobeetBundle/Controller/AdminController.php"
     type:     annotation
     prefix:   /admin
+
+gabi_u_jobeet_api:
+    type: rest
+    prefix: /api
+    resource: "@GabiUJobeetBundle/Resources/config/routing/api.yml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
