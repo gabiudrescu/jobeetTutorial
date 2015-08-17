@@ -22,7 +22,8 @@ GabiU\JobeetBundle\Entity\Affiliate:
         isActive:
             type: boolean
             column: is_active
-            nullable: true
+            nullable: false
+            default: false
         createdAt:
             type: datetime
             column: created_at

@@ -5,6 +5,7 @@ namespace GabiU\JobeetBundle\Controller;
 use GabiU\JobeetBundle\Entity\Affiliate;
 use GabiU\JobeetBundle\Form\AffiliateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class AffiliateController extends Controller
 {
@@ -28,11 +29,28 @@ class AffiliateController extends Controller
         ));
     }
 
-    public function createAction()
+    public function createAction(Request $request)
     {
-        return $this->render('GabiUJobeetBundle:Affiliate:create.html.twig', array(
-                // ...
-            ));
+        $entity = new Affiliate();
+        $form = $this->createAffiliateForm($entity);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid())
+        {
+            $manager = $this->getDoctrine()->getManager();
+            $manager->persist($entity);
+
+            $manager->flush();
+
+            return $this->redirectToRoute("affiliate_wait");
+        }
+
+        return $this->render('GabiUJobeetBundle:Affiliate:new.html.twig', array(
+                "affiliate" => $entity,
+                "form" => $form->createView()
+            )
+        );
     }
 
     public function waitAction()

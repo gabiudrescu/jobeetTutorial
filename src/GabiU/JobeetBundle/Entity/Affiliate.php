@@ -11,6 +11,8 @@ use GabiU\JobeetBundle\Utils\Jobeet as Utils;
  */
 class Affiliate
 {
+    const STATUS_DISABLE = 0;
+    const STATUS_ENABLE = 1;
     /**
      * @var integer
      */
@@ -34,7 +36,7 @@ class Affiliate
     /**
      * @var boolean
      */
-    private $isActive;
+    private $isActive = self::STATUS_DISABLE;
 
     /**
      * @var \DateTime
