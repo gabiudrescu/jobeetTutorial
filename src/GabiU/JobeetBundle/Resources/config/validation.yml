@@ -23,3 +23,13 @@ GabiU\JobeetBundle\Entity\Job:
             - Choice: { callback: getTypeValues }
         logoFile:
             - Image: ~
+
+GabiU\JobeetBundle\Entity\Affiliate:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        url:
+            - Url: ~
+        email:
+            - NotBlank: ~
+            - Email: ~

@@ -34,3 +34,15 @@ easy_admin_bundle:
     resource: "@GabiUJobeetBundle/Controller/AdminController.php"
     type:     annotation
     prefix:   /admin
+
+affiliate_new:
+    path:     /affiliate/new
+    defaults: { _controller: GabiUJobeetBundle:Affiliate:new }
+
+affiliate_create:
+    path:     /create
+    defaults: { _controller: GabiUJobeetBundle:Affiliate:create }
+
+affiliate_wait:
+    path:     /wait
+    defaults: { _controller: GabiUJobeetBundle:Affiliate:wait }
