@@ -112,7 +112,9 @@ easy_admin:
                     - { property: 'isPublic', label: 'Available via API?' }
                     - { property: 'isActivated', label: 'Has been activated?' }
                 actions:
-                    - { name: 'extend', type: 'method', label: 'Extend job' }
+                    - { name: 'show', label: '', icon: 'eye'}
+                    - { name: 'edit', label: '', icon: 'plus'}
+                    - { name: 'extend', type: 'method', label: 'Extend', icon: 'calendar-plus-o'}
             form:
                 fields:
                     - { property: 'Position', help: 'Job title' }
@@ -130,3 +132,9 @@ easy_admin:
         Affiliate:
             class: GabiU\JobeetBundle\Entity\Affiliate
             label: 'API Affiliate access'
+            list:
+                fields:
+                    - { property: 'url', label: 'Affiliate URL'}
+                    - { property: 'email' }
+                    - { property: 'isActive', label: 'Confirmed affiliate?' }
+                    - { property: 'categories', type: 'array', label: 'Applied for' }

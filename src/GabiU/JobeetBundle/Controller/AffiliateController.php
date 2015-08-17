@@ -57,6 +57,8 @@ class AffiliateController extends Controller
     {
         return $this->render('GabiUJobeetBundle:Affiliate:wait.html.twig', array(
                 // ...
-            ));    }
+            )
+        );
+    }
 
 }
