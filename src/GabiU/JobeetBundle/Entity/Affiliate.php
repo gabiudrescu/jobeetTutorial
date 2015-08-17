@@ -4,6 +4,8 @@ namespace GabiU\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use GabiU\JobeetBundle\Utils\Jobeet as Utils;
+
 /**
  * Affiliate
  */
@@ -216,5 +218,18 @@ class Affiliate
     public function setCreatedAtValue()
     {
         $this->setCreatedAt(new \DateTime());
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setTokenValue()
+    {
+        if (!$this->getToken())
+        {
+            $this->setToken(Utils::generateToken($this->getEmail()));
+        }
+
+        return $this;
     }
 }

@@ -41,4 +41,9 @@ class Jobeet
 
         return $text;
     }
+
+    static public function generateToken($property)
+    {
+        return sha1((string) $property . openssl_random_pseudo_bytes(10));
+    }
 }
