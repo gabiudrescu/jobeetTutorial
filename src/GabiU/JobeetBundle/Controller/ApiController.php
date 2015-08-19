@@ -25,12 +25,18 @@ class ApiController extends FOSRestController
      * @Annotations\View("templateVar=job")
      *
      * @param int $id
+     * @param string $token
      *
      * @return array
      *
      * @throws NotFoundHttpException when job doesn't exist
      */
-    public function getJobAction($id)
+    public function getJobAction($id, $token)
+    {
+        return $this->getOr404($id);
+    }
+
+    public function getJobJsonAction($id, $token)
     {
         return $this->getOr404($id);
     }

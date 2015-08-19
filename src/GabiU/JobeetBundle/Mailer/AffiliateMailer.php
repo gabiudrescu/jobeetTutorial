@@ -14,7 +14,7 @@ use Symfony\Component\Templating\EngineInterface;
 
 class AffiliateMailer {
 
-    private $twig;
+    private $render;
 
     private $mailer;
 
@@ -23,13 +23,13 @@ class AffiliateMailer {
     private $message;
 
     /**
-     * @param EngineInterface $twig
+     * @param TemplateRender  $render
      * @param \Swift_Mailer   $mailer
      * @param string          $template
      */
-    public function __construct(EngineInterface $twig, \Swift_Mailer $mailer, $template = "")
+    public function __construct($render, \Swift_Mailer $mailer, $template = "")
     {
-        $this->twig = $twig;
+        $this->render = $render;
         $this->mailer = $mailer;
         $this->template = $template;
         $this->message = \Swift_Message::newInstance();
@@ -41,7 +41,7 @@ class AffiliateMailer {
             ->setSubject('Jobeet affiliate token')
             ->setTo($affiliate->getEmail())
             ->setFrom("gabriel.udr@gmail.com", "Jobeet Administrator")
-            ->setBody($this->twig->render($this->template, array('affiliate' => $affiliate)), "text/html", "utf-8")
+            ->setBody($this->render->render($this->template, array('affiliate' => $affiliate)), "text/html", "utf-8")
         ;
 
         $this->mailer->send($message);

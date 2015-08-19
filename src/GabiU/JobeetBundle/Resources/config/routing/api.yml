@@ -3,3 +3,7 @@ gabi_u_jobeet_get_job:
     prefix: /v1
     resource: @GabiUJobeetBundle/Controller/ApiController.php
     name_prefix: api_1_
+
+gabi_u_jobeet_get_json_job:
+    path: /v1/{token}/{id}
+    defaults: { _controller: GabiUJobeetBundle:Api:getJobJson }

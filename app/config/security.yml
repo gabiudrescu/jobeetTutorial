@@ -10,6 +10,8 @@ security:
                     gabi:
                         password:           1234
                         roles:              [ROLE_USER, ROLE_ADMIN]
+        token_user:
+            id: gabi_u_jobeet.token_user_provider
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -17,9 +19,17 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        api_area:
+            pattern: ^/api/v1/
+            stateless: true
+            simple_preauth:
+                authenticator: gabi_u_jobeet.token_authenticator
+            provider: token_user
+
         secured_area:
             pattern: ^/
             anonymous: ~
+            provider: in_memory
             logout:
                 path: /logout
                 target: /

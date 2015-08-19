@@ -18,4 +18,14 @@ class AffiliateRepository extends EntityRepository
         $this->getEntityManager()->persist($affiliate);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * @param $token
+     *
+     * @return null|Affiliate
+     */
+    public function findOneByToken($token)
+    {
+        return $this->findOneBy(array("token" => $token));
+    }
 }
