@@ -77,6 +77,8 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    port:      %mailer_port%
+    delivery_address: %mailer_catchall%
     spool:     { type: memory }
 
 doctrine_migrations:
@@ -112,7 +114,9 @@ easy_admin:
                     - { property: 'isPublic', label: 'Available via API?' }
                     - { property: 'isActivated', label: 'Has been activated?' }
                 actions:
-                    - { name: 'extend', type: 'method', label: 'Extend job' }
+                    - { name: 'show', label: '', icon: 'eye'}
+                    - { name: 'edit', label: '', icon: 'plus'}
+                    - { name: 'extend', type: 'method', label: 'Extend', icon: 'calendar-plus-o'}
             form:
                 fields:
                     - { property: 'Position', help: 'Job title' }
@@ -130,7 +134,14 @@ easy_admin:
         Affiliate:
             class: GabiU\JobeetBundle\Entity\Affiliate
             label: 'API Affiliate access'
-
+            list:
+                fields:
+                    - { property: 'url', label: 'Affiliate URL'}
+                    - { property: 'email' }
+                    - { property: 'isActive', label: 'Confirmed affiliate?'}
+                    - { property: 'categories', type: 'array', label: 'Applied for' }
+                actions:
+                    - { name: 'activation', type: 'method', label: 'Activate', icon: 'check'}
 
 fos_rest:
     param_fetcher_listener: true

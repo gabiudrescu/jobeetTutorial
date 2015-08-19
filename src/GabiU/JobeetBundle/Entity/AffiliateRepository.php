@@ -12,4 +12,10 @@ use Doctrine\ORM\EntityRepository;
  */
 class AffiliateRepository extends EntityRepository
 {
+    public function activateAffiliate(Affiliate $affiliate)
+    {
+        $affiliate->setIsActive(true);
+        $this->getEntityManager()->persist($affiliate);
+        $this->getEntityManager()->flush();
+    }
 }

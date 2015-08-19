@@ -6,6 +6,27 @@ use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdmin
 
 class AdminController extends BaseAdminController
 {
+    public function activationAction()
+    {
+        $id = $this->request->query->get('id');
+        $affiliate = $this->getDoctrine()->getRepository("GabiUJobeetBundle:Affiliate")->find($id);
+
+        try {
+            $this
+                ->getDoctrine()
+                ->getRepository("GabiUJobeetBundle:Affiliate")
+                ->activateAffiliate($affiliate);
+        } catch (\Exception $e)
+        {
+            $this->addFlash("error", "General error:".$e->getMessage().$e->getTraceAsString());
+        }
+
+        return $this->redirectToRoute("admin", array(
+            "view" => 'edit',
+            "entity" => $this->request->query->get('entity')
+        ));
+    }
+
     public function extendAction()
     {
         $em = $this->getDoctrine()->getManager();

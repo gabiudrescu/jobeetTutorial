@@ -43,3 +43,15 @@ gabi_u_jobeet_api:
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
+
+affiliate_new:
+    path:     /affiliate/new
+    defaults: { _controller: GabiUJobeetBundle:Affiliate:new }
+
+affiliate_create:
+    path:     /create
+    defaults: { _controller: GabiUJobeetBundle:Affiliate:create }
+
+affiliate_wait:
+    path:     /wait
+    defaults: { _controller: GabiUJobeetBundle:Affiliate:wait }

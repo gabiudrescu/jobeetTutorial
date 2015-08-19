@@ -1,0 +1,28 @@
+{% block body %}
+<h1>Jobeet - Affiliate confirmation</h1>
+
+    <p>
+        Thanks for applying to Jobeet. This is an automated notification to let you know your affiliate request
+        has been approved.
+    </p>
+
+    <p>
+        Your token is: <i>{{ affiliate.token }}</i>
+    </p>
+
+    <p>
+        Access the API Documentation here:
+    </p>
+    <ul>
+        <li>
+            <a href="{{ absolute_url('gabi_u_jobeet_homepage') }}">API Documentation</a>
+        </li>
+        <li>
+            <a href="{{ absolute_url('gabi_u_jobeet_homepage') }}">JSON Feed</a>
+        </li>
+        <li>
+            <a href="{{ absolute_url('gabi_u_jobeet_homepage') }}">XML Feed</a>
+        </li>
+    </ul>
+
+{% endblock %}
