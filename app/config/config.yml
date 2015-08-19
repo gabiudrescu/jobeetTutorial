@@ -77,6 +77,8 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    port:      %mailer_port%
+    delivery_address: %mailer_catchall%
     spool:     { type: memory }
 
 doctrine_migrations:
@@ -136,5 +138,7 @@ easy_admin:
                 fields:
                     - { property: 'url', label: 'Affiliate URL'}
                     - { property: 'email' }
-                    - { property: 'isActive', label: 'Confirmed affiliate?' }
+                    - { property: 'isActive', label: 'Confirmed affiliate?'}
                     - { property: 'categories', type: 'array', label: 'Applied for' }
+                actions:
+                    - { name: 'activation', type: 'method', label: 'Activate', icon: 'check'}
