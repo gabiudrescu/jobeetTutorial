@@ -37,7 +37,7 @@ class ApiController extends FOSRestController
 
     protected function getOr404($id){
         if (!$job = $this->container->get("gabi_u_jobeet.page.handler")->get($id)){
-            throw $this->createNotFoundException(sprintf("The resource '%s' was not found. ", $id));
+            throw $this->createNotFoundException(sprintf("The API resource '%s' was not found. ", $id));
         }
 
         return $job;
