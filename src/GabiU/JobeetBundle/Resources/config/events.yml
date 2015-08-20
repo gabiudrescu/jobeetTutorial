@@ -1,0 +1,12 @@
+services:
+    jobeet.listener.affiliate:
+        class: GabiU\JobeetBundle\Events\AffiliateSubscriber
+        arguments: ['@event_dispatcher']
+        tags:
+            - { name: doctrine.event_listener, connection: default, event: postUpdate }
+
+    jobeet.listener.affiliate_mailer:
+        class: GabiU\JobeetBundle\Events\AffiliateMailerSubscriber
+        arguments: ['@gabi_u_jobeet.affiliate_emailer_sender']
+        tags:
+            - { name: kernel.event_subscriber }
