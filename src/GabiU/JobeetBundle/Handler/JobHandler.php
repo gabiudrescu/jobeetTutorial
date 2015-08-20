@@ -10,12 +10,18 @@ namespace GabiU\JobeetBundle\Handler;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
+use GabiU\JobeetBundle\Entity\Affiliate;
 use GabiU\JobeetBundle\Model\JobInterface;
+use GabiU\JobeetBundle\Entity\JobRepository;
 
 class JobHandler implements JobHandlerInterface {
 
     private $objectManager;
     private $entityClass;
+
+    /**
+     * @var JobRepository
+     */
     private $repository;
 
     function __construct(ObjectManager $objectManager, $entityClass)
@@ -23,6 +29,11 @@ class JobHandler implements JobHandlerInterface {
         $this->objectManager = $objectManager;
         $this->entityClass = $entityClass;
         $this->repository = $this->objectManager->getRepository($this->entityClass);
+    }
+
+    public function affiliateJobs($limit = 5, $offset = 0, Affiliate $affiliate)
+    {
+        return $this->repository->getActiveJobs(null, $limit, $offset, $affiliate->getId());
     }
 
     /**

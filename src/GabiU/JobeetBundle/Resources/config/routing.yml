@@ -15,6 +15,7 @@ gabi_u_jobeet_category_feed:
     path:     /feed/category/{slug}/{page}
     defaults: { _controller: GabiUJobeetBundle:Feed:category, page: 1, _format: atom }
     requirements: { _format: atom, page: "\d+" }
+    methods: GET
 
 login:
     path: /login

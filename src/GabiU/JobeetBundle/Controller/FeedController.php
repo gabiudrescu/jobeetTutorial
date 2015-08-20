@@ -6,6 +6,9 @@ use GabiU\JobeetBundle\Entity\Job;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GabiU\JobeetBundle\Entity\Category;
 
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use FOS\RestBundle\Controller\Annotations;
+
 class FeedController extends Controller
 {
     /**
@@ -29,6 +32,22 @@ class FeedController extends Controller
         );
     }
 
+    /**
+     * @ApiDoc(
+     *  resource=true,
+     *  section="Get an ATOM feed for a category",
+     *  description="Gets an ATOM feed based on a category ID",
+     *  statusCodes={
+     *      200 = "Returned when successful",
+     *      404 = "Returned when the job is not found"
+     *  }
+     * )
+     *
+     * @param $slug
+     * @param $page
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function categoryAction($slug, $page)
     {
         $perPage = $this->getParameter("gabiu.jobeet.max_jobs_on_category");

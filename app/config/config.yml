@@ -168,7 +168,11 @@ fos_rest:
     disable_csrf_role: ROLE_API
 
 nelmio_api_doc:
-    name: Page API
+    name: Jobeet API Documentation
+    sandbox:
+        authentication:
+            name: token
+            delivery: query
 
 sensio_framework_extra:
     view: { annotations: false }
