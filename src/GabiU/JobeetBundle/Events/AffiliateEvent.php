@@ -9,6 +9,18 @@
 namespace GabiU\JobeetBundle\Events;
 
 
-class AffiliateEvent {
+use GabiU\JobeetBundle\Entity\Affiliate;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
+class AffiliateEvent extends GenericEvent {
+
+    public function __construct(Affiliate $affiliate, array $arguments = array())
+    {
+        parent::__construct($affiliate, $arguments);
+    }
+
+    public function getAffiliate()
+    {
+        return $this->getSubject();
+    }
 }
