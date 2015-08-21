@@ -28,3 +28,7 @@ install:
 
 after_success:
     - php vendor/bin/coveralls -v
+
+cache:
+    composer: true
+    directories: vendor
