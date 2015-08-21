@@ -34,7 +34,8 @@
         "nelmio/api-doc-bundle": "@dev"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "satooshi/php-coveralls": "~0.6@stable"
     },
     "scripts": {
         "post-root-package-install": [
