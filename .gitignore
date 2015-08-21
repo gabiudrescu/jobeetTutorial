@@ -1,6 +1,11 @@
 /.idea/*
 /.idea/
 
+/web/cov
+/web/images
+
+.coveralls.yml
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Symfony template
 # Cache and logs (Symfony2)
@@ -40,6 +45,3 @@
 
 # Composer PHAR
 /composer.phar
-
-/web/cov
-/web/images
