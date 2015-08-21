@@ -2,7 +2,7 @@ language: php
 php:
     - 5.5
 
-script: phpunit -c app/
+script: phpunit -c app/ --coverage-clover build/logs/clover.xml
 
 before_script:
     - cp app/config/parameters.yml.dist app/config/parameters.yml
@@ -22,3 +22,9 @@ before_script:
 #    - sudo service apache2 restart
 
 sudo: false
+
+install:
+    - composer require satooshi/php-coveralls:~0.6@stable
+
+after_success:
+    - sh -c 'if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls -v; fi;'
