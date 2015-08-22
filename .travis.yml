@@ -25,9 +25,6 @@ before_script:
 
 sudo: false
 
-install:
-    - composer require satooshi/php-coveralls:~0.6@stable
-
 after_success:
     - php vendor/bin/coveralls -v
 
