@@ -67,7 +67,7 @@ body
   margin-right: 40px;
 }
 
-#sub_header .search input
+#sub_header .search button
 {
   background: url(../images/button-search.jpg) no-repeat;
   text-indent: -9999px;
@@ -87,7 +87,7 @@ body
   background-position: left -80px;
 }
 
-#sub_header .search input#search_keywords
+#sub_header .search input#form_query
 {
   font-size: 160%;
   padding: 8px 10px;

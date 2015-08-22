@@ -17,6 +17,19 @@ use GabiU\JobeetBundle\Form\JobType;
  */
 class JobController extends Controller
 {
+    private function searchForm($query = '')
+    {
+        $form = $this->createFormBuilder()
+            ->add('query', 'text', array('attr' => array('id' => 'search_keywords')))
+            ->add('submit', 'submit')
+        ;
+
+        $form->setMethod('GET');
+        $form->setAction($this->generateUrl('search', array("query" => $query)));
+
+        return $form->getForm();
+    }
+
 
     /**
      * Lists all Job entities.
@@ -50,6 +63,7 @@ class JobController extends Controller
 
         return $this->render('GabiUJobeetBundle:Job:index.html.twig', array(
             'categories' => $categories,
+            'searchForm' => $this->searchForm()->createView()
         ));
     }
     /**

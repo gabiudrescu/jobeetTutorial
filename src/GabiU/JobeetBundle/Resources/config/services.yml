@@ -35,6 +35,12 @@ services:
         class: GabiU\JobeetBundle\Security\TokenAuthenticator
         public: false
 
+    gabi_u_jobeet.searchFormBuilder:
+        class: GabiU\JobeetBundle\Form\SearchForm
+        arguments:
+            - @form.factory
+            - @router
+
 #    gabi_u_jobeet.example:
 #        class: GabiU\JobeetBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]

@@ -56,3 +56,11 @@ affiliate_create:
 affiliate_wait:
     path:     /wait
     defaults: { _controller: GabiUJobeetBundle:Affiliate:wait }
+
+search:
+    path:     /search/{page}
+    defaults: { _controller: GabiUJobeetBundle:Search:search, page: 1}
+
+#type_ahead:
+#    path:     /typeAhead
+#    defaults: { _controller: GabiUJobeetBundle:Search:typeAhead, _format: json }

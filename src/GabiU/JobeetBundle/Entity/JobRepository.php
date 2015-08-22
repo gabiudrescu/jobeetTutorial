@@ -15,6 +15,35 @@ use GabiU\JobeetBundle\Utils\Jobeet as Utils;
  */
 class JobRepository extends EntityRepository
 {
+    private function paginte($dql, $limit = 10, $page = 1)
+    {
+        $paginator = Utils::getPaginator($dql);
+
+        $paginator->getQuery()->setMaxResults($limit)->setFirstResult($limit * ($page - 1));
+
+        return $paginator;
+    }
+
+    public function search($search, $limit = 10, $page = 1){
+
+        $search = sprintf("'%%%s%%'", $search);
+
+        $query = $this->createQueryBuilder("j");
+
+        $query->where(
+            $query->expr()->orX(
+                $query->expr()->like('j.position', $search),
+                $query->expr()->like('j.company', $search),
+                $query->expr()->like('j.location', $search),
+                $query->expr()->like('j.description', $search)
+            )
+        );
+
+        $query->orderBy('j.createdAt', 'DESC');
+
+        return $this->paginte($query->getQuery(), $limit, $page);
+    }
+
     /**
      * @param int $days
      *

@@ -35,12 +35,14 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        searchFormBuilder: "@gabi_u_jobeet.searchFormBuilder"
 
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        [ ]
+    bundles:        [ 'GabiUJobeetBundle' ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

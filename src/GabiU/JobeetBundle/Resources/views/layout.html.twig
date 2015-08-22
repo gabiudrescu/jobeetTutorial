@@ -11,6 +11,27 @@
         <link rel="stylesheet" href="{{ asset('bundles/gabiujobeet/css/main.css') }}" type="text/css" media="all" />
     {% endblock %}
     {% block javascripts %}
+        {#{% javascripts#}
+            {#'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'#}
+            {#'https://code.jquery.com/ui/1.10.3/jquery-ui.js'#}
+        {#%}#}
+        {#<script type="text/javascript" src="{{ asset_url }}"></script>#}
+        {#{% endjavascripts %}#}
+
+      {#&#123;&#35;  This javascript is a proof of concept; to be replaced with typeahead.js  &#35;&#125;#}
+        {#<script>#}
+            {#$(document).ready(function()#}
+            {#{#}
+                {#$('#form_query').keyup(function(key)#}
+                {#{#}
+                    {#if(this.value.length >= 3 || this.value == '') {#}
+                        {#$('#jobs').load(#}
+                            {#"{{ path('type_ahead') }}?&term=" + encodeURI(this.value)#}
+                        {#);#}
+                    {#}#}
+                {#});#}
+            {#});#}
+        {#</script>#}
     {% endblock %}
     <link rel="alternate" type="application/atom+xml" title="Latest jobs" href="{{ path('gabi_u_jobeet_homepage', {'_format':'atom'}) }}" />
 </head>
@@ -32,13 +53,27 @@
 
                 <div class="search">
                     <h2>Ask for a job</h2>
-                    <form action="" method="get">
-                        <input type="text" name="keywords" id="search_keywords" />
-                        <input type="submit" value="search" />
-                        <div class="help">
-                            Enter some keywords (city, country, position, ...)
-                        </div>
-                    </form>
+
+                    {# check if layout is rendered in search controller #}
+                    {% if query is not defined %}
+
+                        {# if not, define a query placeholder #}
+                        {% if app.request.get('form') is null %}
+                            {% set query = "Enter some keywords (city, country, position, etc.)" %}
+
+                        {# if its a search, then get the form and get the query parameter #}
+                        {% else %}
+                            {% set queryForm = app.request.get('form') %}
+                            {% set query = queryForm.query %}
+                        {% endif %}
+                    {% endif %}
+
+                    {% set searchForm = searchFormBuilder.searchForm(query) %}
+
+                    {{ form_start(searchForm) }}
+                        {{ form_widget(searchForm.query, {'attr':{'placeholder':query}}) }}
+                        {{ form_widget(searchForm.submit) }}
+                    {{ form_end(searchForm) }}
                 </div>
             </div>
         </div>

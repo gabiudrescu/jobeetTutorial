@@ -1,6 +1,7 @@
 parameters:
     gabiu.jobeet.max_jobs_on_homepage: 10
     gabiu.jobeet.max_jobs_on_category: 5
+    gabiu.jobeet.max_jobs_on_search: 5
     gabiu.jobeet.job.handler.class: GabiU\JobeetBundle\Handler\JobHandler
     gabiu.jobeet.job.class: GabiU\JobeetBundle\Entity\Job
     affiliate_mailer_template: "GabiUJobeetBundle:Affiliate:email.html.twig"
