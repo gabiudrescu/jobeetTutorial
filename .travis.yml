@@ -27,7 +27,7 @@ before_script:
 sudo: false
 
 after_success:
-    - php vendor/bin/coveralls -v
+    - php bin/coveralls -v
 
 cache:
     composer: true
