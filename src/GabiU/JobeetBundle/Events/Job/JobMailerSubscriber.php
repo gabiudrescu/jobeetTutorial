@@ -2,18 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: gabiudrescu
- * Date: 20.08.2015
- * Time: 22:11
+ * Date: 23.08.2015
+ * Time: 17:55
  */
 
-namespace GabiU\JobeetBundle\Events;
+namespace GabiU\JobeetBundle\Events\Job;
 
 
+use GabiU\JobeetBundle\Events\AbstractMailerSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use GabiU\JobeetBundle\Events\AbstractMailerSubscriber as AbstractMailer;
 
-class AffiliateMailerSubscriber extends AbstractMailer implements EventSubscriberInterface {
-
+class JobMailerSubscriber extends AbstractMailerSubscriber implements EventSubscriberInterface {
     /**
      * Returns an array of event names this subscriber wants to listen to.
      *
@@ -37,7 +36,7 @@ class AffiliateMailerSubscriber extends AbstractMailer implements EventSubscribe
     public static function getSubscribedEvents()
     {
         return array(
-            'jobeet.affiliate.activated' => 'sendActivationEmail'
+            "jobeet.job.activate" => "sendActivationEmail"
         );
     }
 

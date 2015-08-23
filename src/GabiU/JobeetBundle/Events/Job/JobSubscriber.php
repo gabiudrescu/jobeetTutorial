@@ -2,26 +2,23 @@
 /**
  * Created by PhpStorm.
  * User: gabiudrescu
- * Date: 20.08.2015
- * Time: 22:02
+ * Date: 23.08.2015
+ * Time: 18:06
  */
 
-namespace GabiU\JobeetBundle\Events;
+namespace GabiU\JobeetBundle\Events\Job;
+
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use GabiU\JobeetBundle\Entity\Job;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use GabiU\JobeetBundle\Entity\Affiliate;
 
-/**
- * Class AffiliateSubscriber
- *
- * Based on this idea: http://stackoverflow.com/a/30138554/2215758
- *
- * @package GabiU\JobeetBundle\Events
- */
-class AffiliateSubscriber implements EventSubscriber {
+class JobSubscriber implements EventSubscriber {
 
+    /**
+     * @var EventDispatcherInterface
+     */
     private $dispatcher;
 
     public function __construct(EventDispatcherInterface $dispatcher)
@@ -31,13 +28,11 @@ class AffiliateSubscriber implements EventSubscriber {
 
     public function postPersist(LifecycleEventArgs $args)
     {
-        /**
-         * @var Affiliate $entity
-         */
         $entity = $args->getEntity();
 
-        if ($entity instanceof Affiliate && true === $entity->getIsActive()){
-            $this->dispatcher->dispatch('jobeet.affiliate.activated', new AffiliateEvent($entity));
+        if ($entity instanceof Job and false === $entity->getIsActivated())
+        {
+            $this->dispatcher->dispatch('jobeet.job.activate', new JobEvent($entity));
         }
     }
 

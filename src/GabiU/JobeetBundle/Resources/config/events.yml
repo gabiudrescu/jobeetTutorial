@@ -1,12 +1,42 @@
 services:
+    jobeet_template:
+        class: GabiU\JobeetBundle\Mailer\TemplateRender
+        arguments: [@service_container]
+
+    gabi_u_jobeet.affiliate_emailer_sender:
+        class: GabiU\JobeetBundle\Mailer\AffiliateMailer
+        arguments:
+            - @jobeet_template
+            - @mailer
+            - %affiliate_mailer_template%
+
+    gabi_u_jobeet.job_emailer_sender:
+        class: GabiU\JobeetBundle\Mailer\JobMailer
+        arguments:
+            - @jobeet_template
+            - @mailer
+            - %job_mailer_template%
+
     jobeet.listener.affiliate:
         class: GabiU\JobeetBundle\Events\AffiliateSubscriber
         arguments: ['@event_dispatcher']
         tags:
-            - { name: doctrine.event_listener, connection: default, event: postUpdate }
+            - { name: doctrine.event_listener, connection: default, event: postPersist }
 
     jobeet.listener.affiliate_mailer:
         class: GabiU\JobeetBundle\Events\AffiliateMailerSubscriber
         arguments: ['@gabi_u_jobeet.affiliate_emailer_sender']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    jobeet.listener.job:
+        class: GabiU\JobeetBundle\Events\Job\JobSubscriber
+        arguments: ['@event_dispatcher']
+        tags:
+            - { name: doctrine.event_listener, connection: default, event: postPersist }
+
+    jobeet.listener.job_mailer:
+        class: GabiU\JobeetBundle\Events\Job\JobMailerSubscriber
+        arguments: ['@gabi_u_jobeet.job_emailer_sender']
         tags:
             - { name: kernel.event_subscriber }
