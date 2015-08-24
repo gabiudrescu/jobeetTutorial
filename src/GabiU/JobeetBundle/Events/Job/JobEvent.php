@@ -13,13 +13,4 @@ use GabiU\JobeetBundle\Entity\Job;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class JobEvent extends GenericEvent {
-
-    public function __construct(Job $job, array $arguments = array()){
-        parent::__construct($job, $arguments);
-    }
-
-    public function getJob()
-    {
-        return $this->getSubject();
-    }
 }

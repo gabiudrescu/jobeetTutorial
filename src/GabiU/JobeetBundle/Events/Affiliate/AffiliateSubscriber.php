@@ -6,7 +6,7 @@
  * Time: 22:02
  */
 
-namespace GabiU\JobeetBundle\Events;
+namespace GabiU\JobeetBundle\Events\Affiliate;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;

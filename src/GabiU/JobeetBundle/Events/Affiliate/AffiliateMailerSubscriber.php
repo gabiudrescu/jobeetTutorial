@@ -6,7 +6,7 @@
  * Time: 22:11
  */
 
-namespace GabiU\JobeetBundle\Events;
+namespace GabiU\JobeetBundle\Events\Affiliate;
 
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

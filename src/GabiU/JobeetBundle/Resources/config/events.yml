@@ -18,13 +18,13 @@ services:
             - %job_mailer_template%
 
     jobeet.listener.affiliate:
-        class: GabiU\JobeetBundle\Events\AffiliateSubscriber
+        class: GabiU\JobeetBundle\Events\Affiliate\AffiliateSubscriber
         arguments: ['@event_dispatcher']
         tags:
             - { name: doctrine.event_listener, connection: default, event: postPersist }
 
     jobeet.listener.affiliate_mailer:
-        class: GabiU\JobeetBundle\Events\AffiliateMailerSubscriber
+        class: GabiU\JobeetBundle\Events\Affiliate\AffiliateMailerSubscriber
         arguments: ['@gabi_u_jobeet.affiliate_emailer_sender']
         tags:
             - { name: kernel.event_subscriber }
