@@ -31,11 +31,11 @@
         "egeloen/ckeditor-bundle": "~2.0",
         "friendsofsymfony/rest-bundle": "@dev",
         "jms/serializer-bundle": "@dev",
-        "nelmio/api-doc-bundle": "@dev",
-        "sensio/generator-bundle": "~2.3"
+        "nelmio/api-doc-bundle": "@dev"
     },
   "require-dev": {
-        "satooshi/php-coveralls": "~0.6@stable"
+        "satooshi/php-coveralls": "~0.6@stable",
+        "sensio/generator-bundle": "~2.3"
     },
     "scripts": {
         "post-root-package-install": [
