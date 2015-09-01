@@ -1,6 +1,6 @@
 set :application, "jobeetTutorial"
 set :domain,      "jobeet.gabiudrescu.com"
-set :deploy_to,   "/var/www/vhosts/gabiudrescu.com/#{domain}"
+set :deploy_to,   "~/#{domain}"
 set :app_path,    "app"
 
 set :repository,  "https://github.com/gabiudrescu/jobeetTutorial.git"
