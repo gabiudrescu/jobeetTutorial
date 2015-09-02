@@ -21,7 +21,7 @@
 
 # Parameters
 /app/config/parameters.yml
-/app/config/parameters_servergrove.yml
+/app/config/parameters_servergroove.yml
 /app/config/parameters.ini
 
 /app/config/deploy.rb
