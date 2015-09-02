@@ -2,16 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: gabiudrescu
- * Date: 19.08.2015
- * Time: 18:16
+ * Date: 23.08.2015
+ * Time: 17:49
  */
 
 namespace GabiU\JobeetBundle\Mailer;
 
-use GabiU\JobeetBundle\Entity\Affiliate;
+
+use GabiU\JobeetBundle\Entity\Job;
 use GabiU\JobeetBundle\Model\MailerObjectInterface;
 
-class AffiliateMailer extends AbstractMailer{
+class JobMailer extends AbstractMailer {
     /**
      * @param MailerObjectInterface $entity
      *
@@ -20,19 +21,17 @@ class AffiliateMailer extends AbstractMailer{
     public function send(MailerObjectInterface $entity)
     {
         /**
-         * @var Affiliate $affiliate
+         * @var Job $job
          */
-        $affiliate = $entity;
+        $job = $entity;
 
         $message = $this->message
-            ->setSubject('Jobeet affiliate token')
-            ->setTo($affiliate->getEmail())
+            ->setSubject('New job posted: activate now!')
+            ->setTo($job->getEmail())
             ->setFrom("gabriel.udr@gmail.com", "Jobeet Administrator")
-            ->setBody($this->render->render($this->template, array('affiliate' => $affiliate)), "text/html", "utf-8")
-        ;
+            ->setBody($this->render->render($this->template, array("job" => $job)), "text/html", "utf-8");
 
         $this->mailer->send($message);
     }
-
 
 }
