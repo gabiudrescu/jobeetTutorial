@@ -21,7 +21,10 @@
 
 # Parameters
 /app/config/parameters.yml
+/app/config/parameters_servergrove.yml
 /app/config/parameters.ini
+
+/app/config/deploy.rb
 
 # Managed by Composer
 /app/bootstrap.php.cache
