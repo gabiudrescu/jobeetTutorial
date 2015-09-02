@@ -24,7 +24,9 @@
 /app/config/parameters_servergroove.yml
 /app/config/parameters.ini
 
+# capifony files
 /app/config/deploy.rb
+Capfile
 
 # Managed by Composer
 /app/bootstrap.php.cache
