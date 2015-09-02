@@ -7,14 +7,6 @@ services:
         class: %gabiu.jobeet.job.handler.class%
         arguments: [@doctrine.orm.entity_manager, %gabiu.jobeet.job.class% ]
 
-#    gabi_u_jobeet.affiliate_emailer_listener:
-#        class: GabiU\JobeetBundle\EventListener\AffiliateEmailerListener
-#        arguments:
-#            - @logger
-#            - @gabi_u_jobeet.affiliate_emailer_sender
-#        tags:
-#            - { name: doctrine.event_listener, event: postUpdate }
-
     gabi_u_jobeet.affiliate_emailer_sender:
         class: GabiU\JobeetBundle\Mailer\AffiliateMailer
         arguments:

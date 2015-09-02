@@ -4,12 +4,13 @@ namespace GabiU\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use GabiU\JobeetBundle\Model\MailerObjectInterface;
 use GabiU\JobeetBundle\Utils\Jobeet as Utils;
 
 /**
  * Affiliate
  */
-class Affiliate
+class Affiliate implements MailerObjectInterface
 {
     const STATUS_DISABLE = 0;
     const STATUS_ENABLE = 1;

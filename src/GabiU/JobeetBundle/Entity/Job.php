@@ -3,6 +3,7 @@
 namespace GabiU\JobeetBundle\Entity;
 
 use GabiU\JobeetBundle\Model\JobInterface;
+use GabiU\JobeetBundle\Model\MailerObjectInterface;
 use GabiU\JobeetBundle\Utils\Jobeet as Jobeet;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Exclude;
@@ -19,7 +20,7 @@ use JMS\Serializer\Annotation\Expose;
  * @Vich\Uploadable
  * @ExclusionPolicy("none")
  */
-class Job implements JobInterface
+class Job implements JobInterface, MailerObjectInterface
 {
     /**
      * @var integer

@@ -2,30 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: gabiudrescu
- * Date: 20.08.2015
- * Time: 22:11
+ * Date: 23.08.2015
+ * Time: 17:55
  */
 
-namespace GabiU\JobeetBundle\Events;
+namespace GabiU\JobeetBundle\Events\Job;
 
 
-use GabiU\JobeetBundle\Mailer\AffiliateMailer;
+use GabiU\JobeetBundle\Events\AbstractMailerSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AffiliateMailerSubscriber implements EventSubscriberInterface {
-
-    private $mailer;
-
-    function __construct(AffiliateMailer $mailer)
-    {
-        $this->mailer = $mailer;
-    }
-
-    public function sendActivationEmail(AffiliateEvent $event)
-    {
-        $this->mailer->send($event->getAffiliate());
-    }
-
+class JobMailerSubscriber extends AbstractMailerSubscriber implements EventSubscriberInterface {
     /**
      * Returns an array of event names this subscriber wants to listen to.
      *
@@ -49,7 +36,7 @@ class AffiliateMailerSubscriber implements EventSubscriberInterface {
     public static function getSubscribedEvents()
     {
         return array(
-            'jobeet.affiliate.activated' => 'sendActivationEmail'
+            "jobeet.job.activate" => "sendActivationEmail"
         );
     }
 

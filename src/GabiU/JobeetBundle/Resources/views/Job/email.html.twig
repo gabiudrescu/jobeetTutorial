@@ -1,0 +1,55 @@
+{% block body %}
+    <h1>Jobeet - New job confirmation</h1>
+
+    <p>
+        Thanks for submitting a new job to Jobeet. This is an automated notification to provide you an admin link.
+    </p>
+
+    <p>
+        Your job <i><a href="{{ url('job_preview', {'token':job.token}) }}">admin URL: {{ url('job_preview', {'token':job.token}) }}</a></i>
+    </p>
+
+    <p>
+        Once activated, the job will be active for 30 days.
+    </p>
+
+    <h2>Job preview:</h2>
+    <table>
+        <tr>
+            <td>Key:</td>
+            <td>Value:</td>
+        </tr>
+        <tr>
+            <td>Category:</td>
+            <td>{{ job.category }}</td>
+        </tr>
+        <tr>
+            <td>Type:</td>
+            <td>{{ job.type }}</td>
+        </tr>
+        <tr>
+            <td>Company:</td>
+            <td>{{ job.company }}</td>
+        </tr>
+        <tr>
+            <td>URL:</td>
+            <td><a href="{{ job.url }}">{{ job.url }}</a></td>
+        </tr>
+        <tr>
+            <td>Position</td>
+            <td>{{ job.position }}</td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>{{ job.description|raw }}</td>
+        </tr>
+        <tr>
+            <td>How to apply?</td>
+            <td>{{ job.howToApply }}</td>
+        </tr>
+        <tr>
+            <td>Is job public via API?</td>
+            <td>{{ job.isPublic ? 'Yes' : 'No'}}</td>
+        </tr>
+    </table>
+{% endblock %}
