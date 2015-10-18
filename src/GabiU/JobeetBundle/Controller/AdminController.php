@@ -18,7 +18,7 @@ class AdminController extends BaseAdminController
                 ->activateAffiliate($affiliate);
         } catch (\Exception $e)
         {
-            $this->addFlash("error", "General error:".$e->getMessage().$e->getTraceAsString());
+            $this->addFlash("danger", "General error:".$e->getMessage().$e->getTraceAsString());
         }
 
         return $this->redirectToRoute("admin", array(
