@@ -138,6 +138,11 @@ class Category
         return $this->affiliates;
     }
 
+    public function getAffiliatesCount()
+    {
+        return $this->getAffiliates()->count();
+    }
+
     public function __toString()
     {
         return $this->getName() ? $this->getName() : "";

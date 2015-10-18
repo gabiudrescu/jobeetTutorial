@@ -133,6 +133,19 @@ easy_admin:
         Category:
             class: GabiU\JobeetBundle\Entity\Category
             label: 'Job categories'
+            list:
+                fields:
+                    - name
+                    - jobs
+                    - { property: Affiliates, type: association, associationType: 8 }
+            show:
+                fields:
+                    - name
+                    - jobs
+                    - { property: Affiliates, type: association, associationType: 8 }
+            form:
+                fields:
+                    - name
         Affiliate:
             class: GabiU\JobeetBundle\Entity\Affiliate
             label: 'API Affiliate access'
