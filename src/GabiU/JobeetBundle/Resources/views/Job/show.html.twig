@@ -27,12 +27,12 @@
         {% endif %}
 
         <div class="description">
-            {{ entity.description|nl2br }}
+            {{ entity.description|nl2br|raw }}
         </div>
 
         <h4>How to apply?</h4>
 
-        <p class="how_to_apply">{{ entity.howtoapply }}</p>
+        <p class="how_to_apply">{{ entity.howtoapply|raw }}</p>
 
         <div class="meta">
             <small>posted on {{ entity.createdat|date('m/d/Y') }}</small>

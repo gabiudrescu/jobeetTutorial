@@ -22,10 +22,10 @@ class JobType extends AbstractType
             ->add('url')
             ->add('position')
             ->add('location')
-            ->add('description')
-            ->add('howToApply', null, array("label" => "How to apply"))
-            ->add('isPublic', null, array("label" => "Public?"))
-            ->add('email')
+            ->add('description','ckeditor')
+            ->add('howToApply', 'ckeditor', array("label" => "How to apply"))
+            ->add('isPublic', null, array("label" => "Public?", 'required' => false))
+            ->add('email','email')
             ->add('category')
         ;
     }
