@@ -29,7 +29,7 @@ class AffiliateSubscriber implements EventSubscriber {
         $this->dispatcher = $dispatcher;
     }
 
-    public function postPersist(LifecycleEventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args)
     {
         /**
          * @var Affiliate $entity
@@ -49,7 +49,7 @@ class AffiliateSubscriber implements EventSubscriber {
     public function getSubscribedEvents()
     {
         return array(
-            "postPersist"
+            "postUpdate"
         );
     }
 

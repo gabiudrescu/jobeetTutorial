@@ -21,7 +21,7 @@ services:
         class: GabiU\JobeetBundle\Events\Affiliate\AffiliateSubscriber
         arguments: ['@event_dispatcher']
         tags:
-            - { name: doctrine.event_listener, connection: default, event: postPersist }
+            - { name: doctrine.event_listener, connection: default, event: postUpdate }
 
     jobeet.listener.affiliate_mailer:
         class: GabiU\JobeetBundle\Events\Affiliate\AffiliateMailerSubscriber
