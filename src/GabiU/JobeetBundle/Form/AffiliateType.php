@@ -15,9 +15,10 @@ class AffiliateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('url')
-            ->add('email')
-            ->add('categories', null, array("expanded" => false, "multiple" => true))
+            ->add('name', null, array('label' => 'Your name'))
+            ->add('url', 'url', array('label' => "The link where you're gonna use this API"))
+            ->add('email','email', array('label' => "The email we're gonna use to provide you the token"))
+            ->add('categories', null, array("expanded" => false, "multiple" => true, 'label' => 'Select the categories you want to get via API'))
             ->add("submit", "submit", array("label" => "Apply"))
         ;
     }

@@ -19,6 +19,7 @@ class AffiliateTest extends \PHPUnit_Framework_TestCase {
         $affiliate = new Affiliate();
 
         $props = array(
+            "name",
             "url",
             "email",
             "token",

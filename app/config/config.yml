@@ -140,6 +140,7 @@ easy_admin:
                 fields:
                     - { property: 'url', label: 'Affiliate URL'}
                     - { property: 'email' }
+                    - { property: 'name', label: 'Affiliate name' }
                     - { property: 'isActive', label: 'Confirmed affiliate?'}
                     - { property: 'categories', type: 'array', label: 'Applied for' }
                 actions:

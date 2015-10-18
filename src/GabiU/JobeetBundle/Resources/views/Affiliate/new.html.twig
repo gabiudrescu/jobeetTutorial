@@ -14,6 +14,13 @@
         </tfoot>
         <tbody>
             <tr>
+                <th>{{ form_label(form.name) }}</th>
+                <td>
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name) }}
+                </td>
+            </tr>
+            <tr>
                 <th>{{ form_label(form.url) }}</th>
                 <td>
                     {{ form_errors(form.url) }}

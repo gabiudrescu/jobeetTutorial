@@ -9,6 +9,10 @@ GabiU\JobeetBundle\Entity\Affiliate:
             generator:
                 strategy: AUTO
     fields:
+        name:
+            type: string
+            length: 255
+            nullable: false
         url:
             type: string
             length: 255
