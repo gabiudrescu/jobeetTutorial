@@ -15,13 +15,13 @@
     </p>
     <ul>
         <li>
-            <a href="{{ absolute_url('gabi_u_jobeet_homepage') }}">API Documentation</a>
+            <a href="{{ url('nelmio_api_doc_index') }}">API Documentation</a>
         </li>
         <li>
-            <a href="{{ absolute_url('gabi_u_jobeet_homepage') }}">JSON Feed</a>
+            <a href="{{ url('api_1_get_jobs',{'_format':'json', 'limit' : 10, 'offset' : 0, 'token' : affiliate.token }) }}">JSON Feed</a>
         </li>
         <li>
-            <a href="{{ absolute_url('gabi_u_jobeet_homepage') }}">XML Feed</a>
+            <a href="{{ url('api_1_get_jobs',{'_format':'xml', 'limit' : 10, 'offset' : 0, 'token' : affiliate.token }) }}">XML Feed</a>
         </li>
     </ul>
 
