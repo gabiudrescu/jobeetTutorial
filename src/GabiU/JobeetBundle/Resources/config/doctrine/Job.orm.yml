@@ -42,6 +42,8 @@ GabiU\JobeetBundle\Entity\Job:
         isPublic:
             type: boolean
             column: is_public
+            options:
+                default: true
         isActivated:
             type: boolean
             column: is_activated

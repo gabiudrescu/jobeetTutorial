@@ -50,3 +50,6 @@ Capfile
 
 # Composer PHAR
 /composer.phar
+
+# Entity backup files
+/**/*php~
