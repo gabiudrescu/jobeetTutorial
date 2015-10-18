@@ -29,6 +29,13 @@ class AffiliateSubscriber implements EventSubscriber {
         $this->dispatcher = $dispatcher;
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     *
+     * check if the updated entity is a Affiliate Entity
+     * if the change is from isActive = false to isActive = true
+     *      dispatch an email event
+     */
     public function postUpdate(LifecycleEventArgs $args)
     {
         /**
@@ -36,8 +43,15 @@ class AffiliateSubscriber implements EventSubscriber {
          */
         $entity = $args->getEntity();
 
-        if ($entity instanceof Affiliate && true === $entity->getIsActive()){
-            $this->dispatcher->dispatch('jobeet.affiliate.activated', new AffiliateEvent($entity));
+        if ($entity instanceof Affiliate){
+            $changes = $args->getEntityManager()->getUnitOfWork()->getEntityChangeSet($entity);
+
+            if (isset($changes['isActive'])
+                && false === $changes['isActive'][0]
+                && false === $changes['isActive'][0]) {
+
+                $this->dispatcher->dispatch('jobeet.affiliate.activated', new AffiliateEvent($entity));
+            }
         }
     }
 
