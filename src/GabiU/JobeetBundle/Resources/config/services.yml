@@ -3,6 +3,11 @@ imports:
     - { resource: events.yml }
 
 services:
+    gabi_u_jobeet.job.type:
+        class: GabiU\JobeetBundle\Entity\Job
+        factory_class: GabiU\JobeetBundle\Entity\Job
+        factory_method: getTypes
+
     gabi_u_jobeet.page.handler:
         class: %gabiu.jobeet.job.handler.class%
         arguments: [@doctrine.orm.entity_manager, %gabiu.jobeet.job.class% ]

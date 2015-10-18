@@ -125,11 +125,19 @@ easy_admin:
                     - { property: 'location' }
                     - { property: 'company' }
                     - { property: 'description', type: 'ckeditor' }
-                    - { property: 'howToApply', type: text }
+                    - { property: 'howToApply', type: ckeditor }
                     - { property: 'url', type: url, label: 'URL' }
                     - { property: 'logoFile', type: vich_image, label: 'Company logo' }
                     - { property: 'category' }
-                    - { property: 'type' }
+#                    - { property: type, type: choice, choices: @gabi_u_jobeet.job.type }
+                    - { property: type, type: choice, choices: {'full-time' : 'Full-Time', 'part-time' : 'Part-Time', 'freelance' : 'Freelance'} }
+#                    - { property: type, type: choice, choices: @gabi_u_jobeet.job.type }
+#                        property: type
+#                        type: choice
+#                        choices:
+#                            full-time: Full-Time
+#                            part-time: Part-Time
+#                            freelance: Freelance
         Category:
             class: GabiU\JobeetBundle\Entity\Category
             label: 'Job categories'
