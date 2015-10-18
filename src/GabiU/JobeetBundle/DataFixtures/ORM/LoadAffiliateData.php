@@ -35,7 +35,7 @@ class LoadAffiliateData extends AbstractFixture implements  OrderedFixtureInterf
         $affiliate->setUrl("/");
         $affiliate->setEmail("test2@test.com");
         $affiliate->setIsActive(false);
-        $affiliate->setName('test 2')
+        $affiliate->setName('test 2');
         $affiliate->addCategory($manager->merge($this->getReference("category-design")));
         $affiliate->addCategory($manager->merge($this->getReference("category-programming")));
 
