@@ -83,7 +83,7 @@ class JobController extends Controller
 
             $this->addFlash("notice", "Job created! Approve now:");
 
-            return $this->redirect($this->generateUrl('job_preview', array('token' => $entity->getToken())));
+            return $this->redirect($this->generateUrl('job_wait', array('token' => $entity->getToken())));
         }
 
         return $this->render(
@@ -125,6 +125,33 @@ class JobController extends Controller
             '@GabiUJobeet/Job/form.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
+        ));
+    }
+
+    public function waitAction($token)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository("GabiUJobeetBundle:Job")->findOneBy(array("token" => $token));
+
+        if (!$entity)
+        {
+            throw $this->createNotFoundException("Unable to find Job entity.");
+        }
+
+        $email = $entity->getEmail();
+
+        try {
+            $provider = $this->get('gabi_u_jobeet.webmailGuesser')->guess($email);
+        } catch (\Exception $e)
+        {
+            $provider = false;
+            $this->get('logger')->addError($e->getMessage(), array($e->getFile(), $e->getLine(), $e->getTraceAsString()));
+        }
+
+        return $this->render('@GabiUJobeet/Job/wait.html.twig', array(
+            'email' => $email,
+            'provider' => $provider
         ));
     }
 

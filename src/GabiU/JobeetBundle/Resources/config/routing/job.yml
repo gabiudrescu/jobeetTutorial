@@ -40,3 +40,9 @@ job_delete:
     path:     /{token}/delete
     defaults: { _controller: "GabiUJobeetBundle:Job:delete" }
     methods:  [POST, DELETE]
+
+
+job_wait:
+    path:     /{token}/wait
+    defaults: { _controller: "GabiUJobeetBundle:Job:wait" }
+    methods: GET
