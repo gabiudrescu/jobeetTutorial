@@ -1,29 +1,21 @@
-{% extends 'GabiUJobeetBundle::layout.html.twig' %}
+{% import '@GabiUJobeet/mPurpose-master/macro/jobList.html.twig' as jobs %}
+{% import '@GabiUJobeet/mPurpose-master/macro/slider.html.twig' as slider %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset("bundles/gabiujobeet/css/jobs.css") }}" type="text/css" media="all"; />
+{% extends 'GabiUJobeetBundle:mPurpose-master:layout.html.twig' %}
+
+{% block heading %}
+    Jobeet Homepage
+{% endblock %}
+
+{% block slider %}
+    {{ slider.render(categories.0.activeJobs) }}
 {% endblock %}
 
 {% block content %}
-    <div id="jobs">
+
+    <div class="row" id="jobs">
         {% for category in categories %}
-            <div>
-                <div id="category_{{ category.slug }}" class="category">
-                    <div class="feed">
-                        <a href="{{ path('gabi_u_jobeet_category_feed', {'slug':category.slug}) }}">Feed</a>
-                    </div>
-                    <h1><a href="{{ path("gabi_u_jobeet_category", {'slug':category.slug}) }}">{{ category.name }}</a></h1>
-                </div>
-
-                {{ include('@GabiUJobeet/list.html.twig', {'jobs':category.activejobs}) }}
-
-                {% if category.morejobs %}
-                    <div class="more_jobs">
-                        and <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug}) }}">{{ category.morejobs }}</a> more
-                    </div>
-                {% endif %}
-            </div>
+            {{ jobs.list(category) }}
         {% endfor %}
     </div>
 {% endblock %}

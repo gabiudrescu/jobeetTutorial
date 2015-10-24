@@ -4,6 +4,8 @@
 
 /web/cov
 /web/images
+web/css
+web/js
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Symfony template
@@ -53,3 +55,7 @@ Capfile
 
 # Entity backup files
 /**/*php~
+
+# mPurpose initial template
+src/GabiU/JobeetBundle/Resources/views/mPurpose-master/initial
+src/GabiU/JobeetBundle/Resources/public/css/unused

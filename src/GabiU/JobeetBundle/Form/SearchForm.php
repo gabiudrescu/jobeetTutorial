@@ -31,7 +31,7 @@ class SearchForm {
         $this->router = $router;
     }
 
-    public function getSearchForm($query)
+    public function getSearchForm($query = '')
     {
         $form = $this->formBuilder
             ->add('query', 'text')

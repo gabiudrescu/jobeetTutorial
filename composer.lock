@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "af11c4d328670d47984c35c15940f0d2",
-    "content-hash": "888634ccbb4d0926511a3860e96dcf99",
+    "hash": "1e88fff4bb4e39afc2bed441c09cda60",
+    "content-hash": "9c26a6b29acb057dfd9737161311e547",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1820,7 +1820,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/9af37448fa2f82856d068205afa96e9874527672",
+                "url": "https://api.github.com/repos/nelmio/NelmioApiDocBundle/zipball/f8b038faf2d82883fd4f7968bd99b4dd9675f59e",
                 "reference": "9af37448fa2f82856d068205afa96e9874527672",
                 "shasum": ""
             },

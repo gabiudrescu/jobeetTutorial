@@ -1,0 +1,53 @@
+{% block navbar %}
+<!-- Navigation & Logo-->
+<div class="mainmenu-wrapper">
+    <div class="container">
+        <nav id="mainmenu" class="mainmenu">
+            <ul>
+                {% block navItems %}
+                <li class="logo-wrapper">
+                    <a href="{{ url('gabi_u_jobeet_homepage') }}">
+                        <img src="{{ asset('bundles/gabiujobeet/img/mPurpose-logo.png') }}" alt="Jobeet">
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('job_new') }}">Post a job</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li class="has-submenu active">
+                    <a href="#">API +</a>
+                    <div class="mainmenu-submenu">
+                        <div class="mainmenu-submenu-inner">
+                            <div>
+                                <h4>Affiliates</h4>
+                                <ul>
+                                    <li><a href="{{ url('affiliate_new') }}">Request access</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Documentation</h4>
+                                <ul>
+                                    <li><a href="{{ url('nelmio_api_doc_index') }}">API Documentation</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Feed</h4>
+                                <ul>
+                                    <li><a href="{{ url('gabi_u_jobeet_all_feed', {'_format':'atom'}) }}">XML Feed</a></li>
+                                    <li><a href="{{ path('gabi_u_jobeet_all_feed', {'_format':'atom'}) }}page-homepage-sample.html">JSON Feed</a></li>
+                                </ul>
+                            </div>
+                        </div><!-- /mainmenu-submenu-inner -->
+                    </div><!-- /mainmenu-submenu -->
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+                {% endblock %}
+            </ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}

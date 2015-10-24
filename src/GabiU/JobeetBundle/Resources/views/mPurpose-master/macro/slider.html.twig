@@ -1,0 +1,40 @@
+{% macro render(items) %}
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="products-slider">
+                        <!-- Products Slider Item -->
+                        {% for item in items %}
+                            <div class="shop-item">
+                                <!-- Product Image -->
+                                <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}">
+                                    <img src="/images/logo/{{ item.logo }}" alt="{{ item.company }}">
+                                </a>
+                                <!-- Product Title -->
+                                <div class="title">
+                                    <h3>
+                                        <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}">
+                                            {{ item.position }}
+                                        </a>
+                                    </h3>
+                                </div>
+                                <!-- Product Price -->
+                                <div class="price">
+                                    {{ item.company }}
+                                </div>
+                                <!-- Buy Button -->
+                                <div class="actions">
+                                    <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}" class="btn btn-small">
+                                        <i class="icon-shopping-cart icon-white"></i> Apply
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <!-- End Products Slider Item -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>mPurpose - Multipurpose Feature Rich Bootstrap Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    {% block stylesheets %}
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
+        {% stylesheets
+            'bundles/gabiujobeet/mPurpose-css/bootstrap.min.css'
+            'bundles/gabiujobeet/mPurpose-css/bootstrap.min.css'
+            'bundles/gabiujobeet/mPurpose-css/icomoon-social.css'
+            'bundles/gabiujobeet/mPurpose-css/leaflet.css'
+            'bundles/gabiujobeet/mPurpose-css/main.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
+    {% endblock stylesheets %}
+
+    {% block headerJS %}
+        {% javascripts
+            'bundles/gabiujobeet/js/modernizr-2.6.2-respond-1.1.0.min.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+{% include '@GabiUJobeet/mPurpose-master/components/navbar.html.twig' %}
+
+{% block header %}
+    <!-- Page Title -->
+    <div class="section section-breadcrumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>{% block heading %}Latest & Featured News{% endblock %}</h1>
+                </div>
+                <div class="col-md-4">
+                    {% block search %}
+                        {% if query is not defined %}
+
+                            {# if its a search, then get the form and get the query parameter #}
+                            {% if app.request.get('form') is not null %}
+                                {% set queryForm = app.request.get('form') %}
+                                {% set query = queryForm.query %}
+                            {% else %}
+                                {% set query = '' %}
+                            {% endif %}
+                        {% endif %}
+
+                        {% set searchForm = searchFormBuilder.searchForm(query) %}
+
+                        {% form_theme searchForm 'bootstrap_3_layout.html.twig' %}
+
+                        {{ form_start(searchForm, { 'attr': {'class': 'form-inline'} }) }}
+                                {{ form_widget(searchForm.query, {'attr':{'placeholder':'City, country or position','class':'form-control input-md'}}) }}
+                                {{ form_widget(searchForm.submit, {'attr':{'class' : 'btn btn-md'}, 'label' : 'Search'}) }}
+                        {{ form_end(searchForm) }}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block slider %}
+{% endblock %}
+
+<div class="section">
+    <div class="container">
+        {% block content %}
+        <div class="row">
+
+            {% block column1 %}
+                {{ jobs.list('Featured jobs', activeJobs) }}
+            {% endblock %}
+
+            {% block column2 %}
+                {{ jobs.list('Newest jobs', activeJobs) }}
+            {% endblock %}
+        </div>
+        {% endblock %}
+    </div>
+</div>
+
+{% include '@GabiUJobeet/mPurpose-master/components/footer.html.twig' %}
+
+{% block footerJS %}
+    {% javascripts
+        'bundles/gabiujobeet/js/jquery-1.9.1.min.js'
+        'bundles/gabiujobeet/js/bootstrap.min.js'
+        'bundles/gabiujobeet/js/jquery.fitvids.js'
+        'bundles/gabiujobeet/js/jquery.sequence-min.js'
+        'bundles/gabiujobeet/js/jquery.bxslider.js'
+        'bundles/gabiujobeet/js/main-menu.js'
+        'bundles/gabiujobeet/js/template.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+</body>
+</html>

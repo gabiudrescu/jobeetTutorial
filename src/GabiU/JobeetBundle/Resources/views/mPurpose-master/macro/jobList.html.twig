@@ -1,0 +1,36 @@
+{% macro list(category) %}
+    <div class="col-sm-6 featured-news">
+        <h2>{{ category.name }}</h2>
+
+        {#<h2 class="pull-left">{{ category.name }}</h2>#}
+        {#<a href="{{ path('gabi_u_jobeet_category_feed', {'slug':category.slug}) }}" class="pull-right">Feed</a>#}
+        {#<div class="clearfix"></div>#}
+
+        {% for item in category.activeJobs %}
+            <div class="row">
+                <div class="col-xs-4">
+                    <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}">
+                        <img src="/images/logo/{{ item.logo }}" alt="{{ item.company }}">
+                    </a>
+                </div>
+                <div class="col-xs-8">
+                    <div class="caption">
+                        <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}">
+                            {{ item.position }}
+                        </a>
+                    </div>
+                    <div class="date">{{ item.createdat|date('m/d/Y') }}</div>
+                    <div class="intro">
+                        {{ item.description|truncate(50, true) }}
+                        <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}">Read more...</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% if category.morejobs %}
+        <div class="more_jobs">
+            <a href="{{ url('gabi_u_jobeet_category', {'slug':category.slug}) }}" class="btn pull-right">View more {{ category.name }} jobs</a>
+        </div>
+        {% endif %}
+    </div>
+{% endmacro %}

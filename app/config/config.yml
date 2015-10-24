@@ -202,3 +202,9 @@ sensio_framework_extra:
     view: { annotations: false }
     router: { annotations: true }
     request: { converters: true }
+
+services:
+ twig.extension.text:
+     class: Twig_Extensions_Extension_Text
+     tags:
+         - { name: twig.extension }
