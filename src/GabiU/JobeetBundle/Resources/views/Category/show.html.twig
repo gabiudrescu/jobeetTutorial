@@ -1,57 +1,88 @@
-{% extends "GabiUJobeetBundle::layout.html.twig" %}
+{% extends "@GabiUJobeet/mPurpose-master/layout.html.twig" %}
 
-{% block title %}
-    Jobs in {{ category.name }} category
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset("bundles/gabiujobeet/css/jobs.css") }}" type="text/css" media="all" />
+{% block heading %}
+    {{ category.name }} jobs ({{ totalJobs }})<a href="#"><span class="feed"></span></a>
 {% endblock %}
 
 {% block content %}
-    <div class="category">
-        <div class="feed">
-            <a href="">Feed</a>
-        </div>
-        <h1>{{ category.name }}</h1>s
-    </div>
 
-    {{ include('@GabiUJobeet/list.html.twig', {'jobs':category.activejobs}) }}
+    <div class="row">
+        <!-- Open Vacancies List -->
+        <div class="col-md-8">
+            {% block jobs %}
+                <table class="jobs-list" id="{{ category.slug }}">
+                    <tr>
+                        <th>Position</th>
+                        <th>Location</th>
+                        <th>Company</th>
+                    </tr>
+                    {% for entity in category.activeJobs %}
+                        <tr>
+                            <!-- Position -->
+                            <td class="job-position">
+                                <a href="{{ path('job_show', {'id':entity.id, 'company':entity.companyslug, 'location':entity.locationslug, 'position':entity.positionslug}) }}">
+                                    {{ entity.position }}
 
-    {% if lastPage > 1 %}
-        <div class="pagination">
-            <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':1}) }}">
-               <img src="{{ asset('bundles/gabiujobeet/images/first.png') }}" alt="First Page" title="First Page" />
-            </a>
-
-            <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':previousPage}) }}">
-                <img src="{{ asset('bundles/gabiujobeet/images/previous.png') }}" alt="Previous Page" title="Previous Page">
-            </a>
-
-            {% for i in 1..lastPage %}
-                {% if i == currentPage %}
-                    {{ i }}
-                {% else %}
-                    <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':i}) }}">
-                        {{ i }}
-                    </a>
+                                </a>
+                                    {#<span class="label label-danger">New</span>#}
+                            </td>
+                            <!-- Location -->
+                            <td class="job-location">
+                                <div class="job-country">{{ entity.location }}</div>
+                            </td>
+                            <!-- Job Type -->
+                            <td class="job-type company">{{ entity.company }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endblock %}
+            {% block pagination %}
+                {% if lastPage > 1 %}
+                    <!-- Pagination -->
+                    <div class="pagination-wrapper ">
+                        <ul class="pagination pagination-sm">
+                            <li {% if currentPage < 2 %}class="disabled"{% endif %}>
+                                <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page': previousPage}) }}">
+                                    Previous
+                                </a>
+                            </li>
+                            {% for i in 1..lastPage %}
+                                <li {% if i == currentPage %}class="active"{% endif %}>
+                                    <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page':i}) }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                            <li {% if currentPage == lastPage %}class="disabled"{% endif %}>
+                                <a href="{{ path('gabi_u_jobeet_category', {'slug':category.slug, 'page': nextPage}) }}">
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 {% endif %}
-            {% endfor %}<a href="{{ path('gabi_u_jobeet_category', { 'slug': category.slug, 'page': nextPage }) }}">
-                <img src="{{ asset('bundles/gabiujobeet/images/next.png') }}" alt="Next page" title="Next page" />
-            </a>
-
-            <a href="{{ path('gabi_u_jobeet_category', { 'slug': category.slug, 'page': lastPage }) }}">
-                <img src="{{ asset('bundles/gabiujobeet/images/last.png') }}" alt="Last page" title="Last page" />
-            </a>
+            {% endblock %}
         </div>
-    {% endif %}
-
-    <div class="pagination_desc">
-        <strong>{{ totalJobs }}</strong> jobs in this category
-
-        {% if lastPage > 1 %}
-            - page <strong>{{ currentPage }}/{{ lastPage }}</strong>
-        {% endif %}
+        <!-- End Open Vacancies List -->
+        <!-- Sidebar -->
+        <div class="col-md-4 col-sm-6">
+            <div class="join-us-promo">
+                <!-- Quote -->
+                <div class="join-us-bubble">
+                    <blockquote>
+                        <p class="quote">
+                            "You are very welcome in our team! Ut enim ad minim veniam, quis nostrud exercitation."
+                        </p>
+                        <cite class="author-info">
+                            - Name Surname,<br>Managing Director
+                        </cite>
+                    </blockquote>
+                    <div class="sprite arrow-speech-bubble"></div>
+                </div>
+                <!-- Team Member Photo -->
+                <div class="author-photo">
+                    <img src="{{ asset('bundles/gabiujobeet/img/user2.jpg') }}" alt="Name Surname">
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
     </div>
 {% endblock %}

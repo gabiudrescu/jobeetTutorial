@@ -4,6 +4,7 @@ namespace GabiU\JobeetBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use GabiU\JobeetBundle\Entity\Category;
+use GabiU\JobeetBundle\Entity\Job;
 
 class CategoryController extends Controller
 {
@@ -50,7 +51,7 @@ class CategoryController extends Controller
                 "category" => $category,
                 "lastPage" => $lastPage,
                 "previousPage" => $previousPage,
-                "currentPage" => $page,
+                "currentPage" => (int) $page,
                 "nextPage" => $nextPage,
                 "totalJobs" => $totalJobs
             )
