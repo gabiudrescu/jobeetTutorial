@@ -15,16 +15,30 @@ use GabiU\JobeetBundle\Entity\Category;
  */
 class CategoryRepository extends EntityRepository
 {
-    public function getWithJobs()
+    public function getWithJobs($categoryId = null, $number = null)
     {
-        $query = $this->getEntityManager()->createQuery(
-            "SELECT c FROM GabiUJobeetBundle:Category c LEFT JOIN  c.jobs j where j.expiresAt > :date and j.isActivated = :activated"
-        );
+        $query = $this->createQueryBuilder('c')
+            ->select('c,j')
+            ->leftJoin('c.jobs','j')
+            ->where('j.expiresAt > :date')
+            ->andWhere('j.isActivated = :activated')
+        ;
+
+        if ($categoryId)
+        {
+            $query->andWhere('c.id = :id');
+            $query->setParameter('id', $categoryId);
+        }
+
+        if ($number)
+        {
+            $query->setMaxResults($number);
+        }
 
         $query->setParameter("date", Jobeet::getCurrentDate());
         $query->setParameter("activated", true);
 
-        return $query->getResult();
+        return $query->getQuery()->getResult();
     }
 
     /**

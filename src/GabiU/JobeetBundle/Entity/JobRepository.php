@@ -63,14 +63,22 @@ class JobRepository extends EntityRepository
         return $query->execute();
     }
 
+    /**
+     * @param $id
+     *
+     * @return Job|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getActiveJob($id)
     {
         $query = $this->createQueryBuilder('j')
+            ->select('j,c')
             ->where('j.id = :id')
             ->setParameter('id', $id)
             ->andWhere('j.expiresAt > :date')
             ->setParameter('date', date('Y-m-d H:i:s', time()))
             ->andWhere("j.isActivated = :activated")
+            ->leftJoin('j.category','c')
             ->setParameter("activated", true)
             ->setMaxResults(1)
             ->getQuery();

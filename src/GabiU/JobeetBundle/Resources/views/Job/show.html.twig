@@ -1,42 +1,51 @@
-{% extends 'GabiUJobeetBundle::layout.html.twig' %}
+{% extends 'GabiUJobeetBundle:mPurpose-master:layout.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/gabiujobeet/css/job.css') }}" type="text/css" media="all" />
+{% block heading %}
+    {{ entity.type|capitalize }} {{ entity.category.name }} job in {{ entity.location }}
 {% endblock %}
 
 {% block content %}
-    {% if app.request.get('token') %}
-        {% include '@GabiUJobeet/Job/admin.html.twig' with {'job':entity} %}
-    {% endif %}
-    <div id="job">
-        <h1>{{ entity.company }}</h1>
-        <h2>{{ entity.location }}</h2>
-        <h3>
-            {{ entity.position }}
-            <small> - {{ entity.type }}</small>
-        </h3>
-
-        {% if entity.logo %}
-            <div class="logo">
-                <a href="{{ entity.url }}">
-                    <img src="/images/logo/{{ entity.logo }}" width="100px"
-                         alt="{{ entity.company }} logo" />
-                </a>
-            </div>
+    <div class="col-md-7">
+        {% if app.request.get('token') %}
+            {% include '@GabiUJobeet/Job/admin.html.twig' with {'job':entity} %}
         {% endif %}
 
-        <div class="description">
-            {{ entity.description|raw }}
+        <!-- Job Description -->
+        <div class="job-details-wrapper" id="job">
+            <h3>{{ entity.position }} at {{ entity.company }}</h3>
+            <div class="description">
+                {% if entity.logo %}
+                    <div class="logo">
+                        <a href="{{ entity.url }}" class="pull-right">
+                            <img src="/images/logo/{{ entity.logo }}" width="100px" alt="{{ entity.company }} logo" />
+                        </a>
+                    </div>
+                {% endif %}
+                {{ entity.description|raw }}
+            </div>
+            <h4>How to apply?</h4>
+            <p class="how_to_apply">{{ entity.howtoapply|raw }}</p>
+            <div class="meta">
+                <small>posted on {{ entity.createdat|date('m/d/Y') }}</small>
+            </div>
         </div>
-
-        <h4>How to apply?</h4>
-
-        <p class="how_to_apply">{{ entity.howtoapply|raw }}</p>
-
-        <div class="meta">
-            <small>posted on {{ entity.createdat|date('m/d/Y') }}</small>
-        </div>
-
     </div>
+    <!-- End Job Description -->
+    <!-- Sidebar -->
+    <div class="col-md-4 col-md-offset-1">
+        <h4>You may also be interested in</h4>
+        <table class="jobs-list">
+            {% for job in similarJobs %}
+                <tr>
+                    <td class="job-position">
+                        <a href="{{ path('job_show', {'id':job.id, 'company':job.companyslug, 'location':job.locationslug, 'position':job.positionslug}) }}">
+                            {{ entity.position }} at {{ entity.company }}
+                        </a>
+                        {#<span class="label label-danger">New</span>#}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- End Sidebar -->
 {% endblock %}

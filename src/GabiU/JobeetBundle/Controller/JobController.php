@@ -161,6 +161,9 @@ class JobController extends Controller
      */
     public function showAction($id)
     {
+        /**
+         * @var $em EntityManager
+         */
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('GabiUJobeetBundle:Job')->getActiveJob($id);
@@ -169,8 +172,14 @@ class JobController extends Controller
             throw $this->createNotFoundException('Unable to find Job entity.');
         }
 
+        /**
+         * @var $similarJobs Job
+         */
+        $similarJobs = $em->getRepository('GabiUJobeetBundle:Job')->getActiveJobs($entity->getCategory()->getId(), 3)->getQuery()->getResult();
+
         return $this->render('GabiUJobeetBundle:Job:show.html.twig', array(
-            'entity'      => $entity
+            'entity'      => $entity,
+            'similarJobs' => $similarJobs
         ));
     }
 
