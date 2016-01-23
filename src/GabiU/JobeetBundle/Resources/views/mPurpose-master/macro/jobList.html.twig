@@ -7,7 +7,7 @@
         {#<div class="clearfix"></div>#}
 
         {% for item in category.activeJobs %}
-            <div class="row">
+            <div class="row" id="{{ category.name }}">
                 <div class="col-xs-4">
                     <a href="{{ url('job_show', {'id':item.id, 'company':item.companyslug, 'location':item.locationslug, 'position':item.positionslug}) }}">
                         <img src="/images/logo/{{ item.logo }}" alt="{{ item.company }}">

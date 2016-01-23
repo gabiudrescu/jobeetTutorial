@@ -43,7 +43,7 @@ class JobControllerTest extends FunctionalFixturesTestCase {
         /**
          * nextAll() will return a table with all the jobs
          */
-        $this->assertEquals($maxJobsOnHomepage, $crawler->filter("div#category_design")->nextAll()->filter("tr")->count());
+        $this->assertEquals($maxJobsOnHomepage, $crawler->filter("div#Design")->count());
 
         /**
          * There's only one category with more than $maxJobsOnHomepage jobs (e.g. 20)
